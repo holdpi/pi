@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0-review",
+  "version": "1.1.0-review",
   "status": "Review source. Unregistered. No public-chain deployment.",
   "upstream_commit": "8ca5554df22ad511126d8547c212fa161ecf19ee",
   "compiler": "0.8.24+commit.e11b9ed9.Emscripten.clang",
@@ -12,14 +12,9 @@
     },
     {
       "name": "HoldCurveModule",
-      "runtime_bytes": 5997,
+      "runtime_bytes": 6018,
       "source": "src/protocol/HoldCurveModule.sol",
       "abi": [
-        {
-          "inputs": [],
-          "stateMutability": "nonpayable",
-          "type": "constructor"
-        },
         {
           "anonymous": false,
           "inputs": [
@@ -537,14 +532,9 @@
     },
     {
       "name": "HoldMigrateModule",
-      "runtime_bytes": 6383,
+      "runtime_bytes": 6404,
       "source": "src/protocol/HoldMigrateModule.sol",
       "abi": [
-        {
-          "inputs": [],
-          "stateMutability": "nonpayable",
-          "type": "constructor"
-        },
         {
           "anonymous": false,
           "inputs": [
@@ -1087,14 +1077,9 @@
     },
     {
       "name": "HoldRewards",
-      "runtime_bytes": 9097,
+      "runtime_bytes": 9617,
       "source": "src/protocol/HoldRewards.sol",
       "abi": [
-        {
-          "inputs": [],
-          "stateMutability": "nonpayable",
-          "type": "constructor"
-        },
         {
           "anonymous": false,
           "inputs": [
@@ -1506,7 +1491,7 @@
                   "type": "uint256"
                 }
               ],
-              "internalType": "struct HoldRewards.Lot[]",
+              "internalType": "struct RewardLedger.Lot[]",
               "name": "",
               "type": "tuple[]"
             }
@@ -1603,7 +1588,7 @@
           "name": "quote",
           "outputs": [
             {
-              "internalType": "contract IHoldWrappedBNB",
+              "internalType": "contract IWrappedBNB",
               "name": "",
               "type": "address"
             }
@@ -1662,7 +1647,7 @@
           "outputs": [
             {
               "internalType": "uint256",
-              "name": "w",
+              "name": "totalWeightUnits",
               "type": "uint256"
             }
           ],
@@ -1709,7 +1694,7 @@
     },
     {
       "name": "HoldToken",
-      "runtime_bytes": 13814,
+      "runtime_bytes": 13879,
       "source": "src/protocol/HoldToken.sol",
       "abi": [
         {
@@ -2352,7 +2337,7 @@
           "name": "rewards",
           "outputs": [
             {
-              "internalType": "contract HoldRewards",
+              "internalType": "contract RewardLedger",
               "name": "",
               "type": "address"
             }
@@ -2558,7 +2543,7 @@
           "name": "treasury",
           "outputs": [
             {
-              "internalType": "contract HoldTreasury",
+              "internalType": "contract Treasury",
               "name": "",
               "type": "address"
             }
@@ -3155,14 +3140,9 @@
     },
     {
       "name": "HoldTreasury",
-      "runtime_bytes": 12508,
+      "runtime_bytes": 14368,
       "source": "src/protocol/HoldTreasury.sol",
       "abi": [
-        {
-          "inputs": [],
-          "stateMutability": "nonpayable",
-          "type": "constructor"
-        },
         {
           "anonymous": false,
           "inputs": [
@@ -3673,7 +3653,7 @@
           "name": "router",
           "outputs": [
             {
-              "internalType": "contract IHoldV2Router",
+              "internalType": "contract IV2Router",
               "name": "",
               "type": "address"
             }
@@ -4433,14 +4413,19 @@
   ],
   "files": [
     {
+      "path": ".prettierrc.json",
+      "bytes": 127,
+      "sha256": "f84233e311b9e1a5253abb233bb06491535b80e29da6b6b8a1a482a92c821142"
+    },
+    {
       "path": "README.md",
-      "bytes": 8442,
-      "sha256": "e0b8253b5d1ade3e7e175329c225772e042cf9bcf94a8ab7f17988212c6a0af9"
+      "bytes": 8555,
+      "sha256": "9f4aa5e3178cc19e7fff247349ccda52f4b623f99aa4574024af10a0b46b7400"
     },
     {
       "path": "compiler-input.json",
-      "bytes": 231073,
-      "sha256": "b3e1c93fc169bb1e642ce4c548e05610b2d791adc740a80434928bd0a1964873"
+      "bytes": 205144,
+      "sha256": "f8484dee92ef11d52d93bcf5de4f880f3dc0ff9235ef742305a62ae300125775"
     },
     {
       "path": "configuration.example.json",
@@ -4449,23 +4434,18 @@
     },
     {
       "path": "contracts/artifacts/src/PiCurveModule.sol/PiCurveModule.json",
-      "bytes": 29537,
-      "sha256": "8a0ec89be0672755bab5b0da4228bf466c9e59bec00684ced14eb3b1bce2255f"
-    },
-    {
-      "path": "contracts/artifacts/src/PiMigrateModule.sol/IPiMigrationToken.json",
-      "bytes": 1144,
-      "sha256": "1a2a9583127a3a09dead356f23a007d16209aa70932b738ccfbd4b31ccebd7a9"
+      "bytes": 29517,
+      "sha256": "5c72c06627c030f2a057b8fb4017ca1cc1aadddb2392b6eef46eedebca66f31b"
     },
     {
       "path": "contracts/artifacts/src/PiMigrateModule.sol/PiMigrateModule.json",
-      "bytes": 29605,
-      "sha256": "000ff4293be106efe16a4ba25824e1ba2142dcc492004bad6e26d29c05f598aa"
+      "bytes": 29585,
+      "sha256": "b811b8869ca1e967c0a46a5ae144e3bb7ddb4d96a8cd7cbb632aa83f7f65f484"
     },
     {
       "path": "contracts/artifacts/src/PiPresetValidator.sol/PiPresetValidator.json",
       "bytes": 16192,
-      "sha256": "2519a5db8ccfae4bf5980ed9cafc6f48a92ee59872e6d67f51c8ccd78c01514e"
+      "sha256": "aa4c3834e986496def82df9889350c3f741db37c96083f3b4a880add1bc7cb8d"
     },
     {
       "path": "contracts/artifacts/src/PiRates.sol/PiRates.json",
@@ -4473,19 +4453,14 @@
       "sha256": "c1cdf7ddfcbbe62cd7cda771009edc5c6fc4787a892aaea1f8d5402899e8ecd0"
     },
     {
-      "path": "contracts/artifacts/src/PiRewards.sol/IWrappedBNB.json",
-      "bytes": 4372,
-      "sha256": "0e41003d64166121d4fde26a9b11402a09f6d65f643c6c96e9d92b15d5b6dbff"
-    },
-    {
       "path": "contracts/artifacts/src/PiRewards.sol/PiRewards.json",
-      "bytes": 44749,
-      "sha256": "72ae270853069f1373579747341435b29a62ca2525b6baade38aad74113eafa4"
+      "bytes": 47083,
+      "sha256": "108af9243007ee678b6cfe470d93820ca5d0ff18b6408838e464d8427fffe54b"
     },
     {
       "path": "contracts/artifacts/src/PiToken.sol/PiToken.json",
-      "bytes": 68269,
-      "sha256": "eedd447866a288f86a65fc0b35845bd9b680eaf0a90a4f59c7300753d2bd8da9"
+      "bytes": 68558,
+      "sha256": "3c59d981a8731493da3aef1b2c5170130d6b5f335ba79c34ab451f2cca9a7179"
     },
     {
       "path": "contracts/artifacts/src/PiTokenModule.sol/PiTokenModule.json",
@@ -4503,34 +4478,9 @@
       "sha256": "401890eb71bee2e01a5f56ccbae3b4b8bf1cf4b9bba8d51c41f21525117120ca"
     },
     {
-      "path": "contracts/artifacts/src/PiTreasury.sol/IPiAsset.json",
-      "bytes": 4868,
-      "sha256": "fd0693ea82201e16f5fb50947c5a6a4dc80bd66153242b3394cd23455d3ded8c"
-    },
-    {
-      "path": "contracts/artifacts/src/PiTreasury.sol/IPiRewardFunding.json",
-      "bytes": 486,
-      "sha256": "edc371792a5d1ef5c92ccf7b4c735ecfc04ef20c9132a8a36c07d4bd937f6f6e"
-    },
-    {
-      "path": "contracts/artifacts/src/PiTreasury.sol/IV2Factory.json",
-      "bytes": 1181,
-      "sha256": "43b7a37b781c21392b7eed66865ae542ba9550f1b11aa8c442e4e9258ba37ae7"
-    },
-    {
-      "path": "contracts/artifacts/src/PiTreasury.sol/IV2Pair.json",
-      "bytes": 5836,
-      "sha256": "0fda089daf0db859d85c3fe7e704fb4748a8cabf79f16a7a6425c03a4189f4c9"
-    },
-    {
-      "path": "contracts/artifacts/src/PiTreasury.sol/IV2Router.json",
-      "bytes": 2811,
-      "sha256": "3c86eaad8dfd506273f864bfcbf5148882ee83b918645fc7f9cf4bcf0a7b0aca"
-    },
-    {
       "path": "contracts/artifacts/src/PiTreasury.sol/PiTreasury.json",
-      "bytes": 60876,
-      "sha256": "a85e70347acb455eb62b16edb8b913f0376784353ed18dc4b665d237c59f29ec"
+      "bytes": 67352,
+      "sha256": "42900bf532f1a474ab660b801bfbd417e245ef095068444782cdbcf38fcc41b3"
     },
     {
       "path": "contracts/artifacts/src/PiVault.sol/PiVault.json",
@@ -4538,54 +4488,104 @@
       "sha256": "e67ddca08270a5a31b9dc8fc0bd42ad3cf7c3b59292da190887179eae3097e29"
     },
     {
+      "path": "contracts/artifacts/src/common/AcquisitionToken.sol/AcquisitionToken.json",
+      "bytes": 17650,
+      "sha256": "2366db3e6da048877bf789bdb9fa9230c7bc3882c9f11ed3166c913a6fcbe4d2"
+    },
+    {
+      "path": "contracts/artifacts/src/common/PancakeMigration.sol/IPiMigrationToken.json",
+      "bytes": 1152,
+      "sha256": "30cfaefcb13c3c8b6a02f5079341c2be474d0c4c3ec11b61e9af0da09ff87ddc"
+    },
+    {
+      "path": "contracts/artifacts/src/common/PancakeMigration.sol/PancakeMigration.json",
+      "bytes": 5852,
+      "sha256": "08215f799cf4d1a26fdfb11b2fa46a187e341e3efee3512e7c4713687ab4637c"
+    },
+    {
+      "path": "contracts/artifacts/src/common/RewardLedger.sol/IWrappedBNB.json",
+      "bytes": 4382,
+      "sha256": "8396acd48267e5f78750c20e368f725fcc02106a462be06f7779f99c7a33b4fa"
+    },
+    {
+      "path": "contracts/artifacts/src/common/RewardLedger.sol/RewardLedger.json",
+      "bytes": 10504,
+      "sha256": "df9c8d4957fb21be7857ba2b890fdb5a99d8e8725ecbc545924d2573bce8555e"
+    },
+    {
+      "path": "contracts/artifacts/src/common/Treasury.sol/IPiAsset.json",
+      "bytes": 4873,
+      "sha256": "dc47671390cfe9b924586120a920ba90aec68134b51e687e5d10d7b00111240c"
+    },
+    {
+      "path": "contracts/artifacts/src/common/Treasury.sol/IPiRewardFunding.json",
+      "bytes": 491,
+      "sha256": "6e1b66d857f55522e85b1071434842dfa38bccacb2d3f207595e1708d7adaa47"
+    },
+    {
+      "path": "contracts/artifacts/src/common/Treasury.sol/IV2Factory.json",
+      "bytes": 1186,
+      "sha256": "829c2b252989270282b3149fa84dde172e81cbf904b904fa8676a7abae8cdff7"
+    },
+    {
+      "path": "contracts/artifacts/src/common/Treasury.sol/IV2Pair.json",
+      "bytes": 5841,
+      "sha256": "5f3686c08060e3de614563724512dc9ecee6156c2a2c734cead69e6204e71b31"
+    },
+    {
+      "path": "contracts/artifacts/src/common/Treasury.sol/IV2Router.json",
+      "bytes": 2816,
+      "sha256": "aeeccf80e954ec17364edfb9e50bb600e32fe1c4e3381ad4cc52c64222545bd7"
+    },
+    {
+      "path": "contracts/artifacts/src/common/Treasury.sol/Treasury.json",
+      "bytes": 11349,
+      "sha256": "751fbc645fd1c7688a2e59421b5cd70d6d55223954796459410a066ad3fcdef7"
+    },
+    {
+      "path": "contracts/artifacts/src/common/VirtualReserveCurve.sol/VirtualReserveCurve.json",
+      "bytes": 10358,
+      "sha256": "4f0ae9f4fc33941fd32a860d8b578d8a672da6599e4da0eeca1c72e74b5e6b21"
+    },
+    {
       "path": "contracts/artifacts/src/protocol/HoldConfig.sol/HoldConfig.json",
       "bytes": 523,
-      "sha256": "3655eca0ce950a1b3b0a31e03bd77afa42ac2a69ba9ef39d1164becb266c1890"
+      "sha256": "892c178d6306c2bc6a9e5d4e885af09f2149e148e4ce84102a36db261e699b70"
     },
     {
       "path": "contracts/artifacts/src/protocol/HoldCurveModule.sol/HoldCurveModule.json",
-      "bytes": 36984,
-      "sha256": "bad3352517e300f5f85117c1c2c09416171b697f28ac8dc8cc09f8d01894103a"
+      "bytes": 36968,
+      "sha256": "a5ecc417b45945c7b8d38a9c4c2091b3be2baed1c0f26c4a7728e8ab18489980"
     },
     {
       "path": "contracts/artifacts/src/protocol/HoldMigrateModule.sol/HoldMigrateModule.json",
-      "bytes": 34032,
-      "sha256": "15fee920fde7b150e208e490eb3ee3b0998fb09a80b0d28ed363970bb2ba0dd0"
-    },
-    {
-      "path": "contracts/artifacts/src/protocol/HoldMigrateModule.sol/IPiMigrationToken.json",
-      "bytes": 1155,
-      "sha256": "6cace613e2e53c9ba106daf19f021facd31cb6289cf2aa7e84b6b2336cbb2fc1"
+      "bytes": 34016,
+      "sha256": "2608a1f0d4b8b721ff6eb2d8d64d5e2f974658cf70943e1080a1eec721802000"
     },
     {
       "path": "contracts/artifacts/src/protocol/HoldPresetValidator.sol/HoldPresetValidator.json",
       "bytes": 22863,
-      "sha256": "5d536c06cc205ec6fbc98940b7e9576578fa9e90b06e2be711856f8a8daa5797"
+      "sha256": "16f34939c6957fc4361961818a16a78dc35211169babfd147e625e3ac75fadf3"
     },
     {
       "path": "contracts/artifacts/src/protocol/HoldRewards.sol/HoldRewards.json",
-      "bytes": 49570,
-      "sha256": "c7b7a063d48ee38d588bb497a5cf9ea615b823c87c089d43ea2146c82560b253"
-    },
-    {
-      "path": "contracts/artifacts/src/protocol/HoldRewards.sol/IHoldWrappedBNB.json",
-      "bytes": 4387,
-      "sha256": "69e0c4f3526d2a5156029f36d27a0ecf7cfead8f3457edf484dae79a4c95e3a2"
+      "bytes": 51562,
+      "sha256": "5b272e11a6d06b6d3931a42f868db161e8b19c5a07b087afbf90844d3cd57f3d"
     },
     {
       "path": "contracts/artifacts/src/protocol/HoldToken.sol/HoldToken.json",
-      "bytes": 75542,
-      "sha256": "1bf163b0418e8ca4b92635a85adf9df215c0a0495a371482345fbf42d9803918"
+      "bytes": 75799,
+      "sha256": "404fb6be69ba59110a05c526a5b08c37f11d68b8e6843b65a6dbc9d2217ebe1b"
     },
     {
       "path": "contracts/artifacts/src/protocol/HoldTokenModule.sol/HoldTokenModule.json",
       "bytes": 34179,
-      "sha256": "66a824cede2770dca1f5fcf567319e35c0f717059b870be49e11fc5b3d7bd891"
+      "sha256": "7ef579ab177aa737928fab235af4e1161bc7e84be852dd93b8e4a91db9f0cd62"
     },
     {
       "path": "contracts/artifacts/src/protocol/HoldTradeModule.sol/HoldTradeModule.json",
       "bytes": 21138,
-      "sha256": "60719dd5f9edd06c932afd23f75ed6caa9c047a988d9d963a25ad51d6ad08e30"
+      "sha256": "64fc3843525af22df3b1bf735c77c4602a13fb7fa51bf3e59dc03c5b68f3c3d3"
     },
     {
       "path": "contracts/artifacts/src/protocol/HoldTradeModule.sol/IHoldTradeToken.json",
@@ -4594,38 +4594,13 @@
     },
     {
       "path": "contracts/artifacts/src/protocol/HoldTreasury.sol/HoldTreasury.json",
-      "bytes": 63113,
-      "sha256": "f4c44578117ee3fb60173d876164f636e4bad713511847f14113ed6817acc9d1"
-    },
-    {
-      "path": "contracts/artifacts/src/protocol/HoldTreasury.sol/IHoldAsset.json",
-      "bytes": 4881,
-      "sha256": "907821aecbf51173a57c138b52facc503d9fa8ad5b81cb2c0c1e1a5a9d2995d7"
-    },
-    {
-      "path": "contracts/artifacts/src/protocol/HoldTreasury.sol/IHoldRewardFunding.json",
-      "bytes": 499,
-      "sha256": "2f7f715d0399178740877263de681e7746df3739660ddfef7c406123f25de123"
-    },
-    {
-      "path": "contracts/artifacts/src/protocol/HoldTreasury.sol/IHoldV2Factory.json",
-      "bytes": 1196,
-      "sha256": "d119112ef262893c8379dda34b0fac7856259282ab5c6f4913679e4a91bc8590"
-    },
-    {
-      "path": "contracts/artifacts/src/protocol/HoldTreasury.sol/IHoldV2Pair.json",
-      "bytes": 5851,
-      "sha256": "bacd3956972f192a765014f0450108b566b11f03b311470f96e0fa11f7ef62fb"
-    },
-    {
-      "path": "contracts/artifacts/src/protocol/HoldTreasury.sol/IHoldV2Router.json",
-      "bytes": 2826,
-      "sha256": "64c9822512bdebaf9fa80cb7a9e3b2feaa7a33104748d3c82f689dd8831abaf0"
+      "bytes": 70457,
+      "sha256": "8044360f4924f42ad47b2d26ed36f1447a31884879d034c7812a9ac8f5bc61ea"
     },
     {
       "path": "contracts/artifacts/src/protocol/HoldVault.sol/HoldVault.json",
       "bytes": 43055,
-      "sha256": "57e54377b49c441c4fb955f5cbc36415523f9c6c733ee09d4352003a2ce52c8f"
+      "sha256": "66a436eaf5b9521bc351646d827dd68e1f927e70c34d238ce814f141e797f2db"
     },
     {
       "path": "contracts/artifacts/src/protocol/HoldVault.sol/IHoldCoreVaultView.json",
@@ -4635,37 +4610,42 @@
     {
       "path": "contracts/artifacts/src/test/CoreHarness.sol/ClaimsReentry.json",
       "bytes": 3295,
-      "sha256": "1390a304d90e6406aae9ac3aed1e044497adc915621214efca2aaae8c03a9e22"
+      "sha256": "cc66ed40f1048a9c936f98173e6b8bb9eb88d3cd552e937e4fc43e0c0ee83950"
     },
     {
       "path": "contracts/artifacts/src/test/CoreHarness.sol/CoreHarness.json",
       "bytes": 54672,
-      "sha256": "8006849d33c8d370d249494ecc077a9c79bd4defa3541f14db46cfba48999b02"
+      "sha256": "b1a296bf6013e4d249251cf26353e72eeba36c6ff2bdd8b7444b61ad524c56ef"
     },
     {
       "path": "contracts/artifacts/src/test/CoreHarness.sol/RejectBNB.json",
       "bytes": 818,
-      "sha256": "cf2fd2f0f73958c5003e86d0faa2f98d1df3671cd4c28054353fa0dfd762ff82"
+      "sha256": "ecf622ae19a09a6759aa99663bf05bd089797ab1bef48c6941d23a90efb5cbfa"
+    },
+    {
+      "path": "contracts/artifacts/src/test/CoreHarness.sol/UninitializedClone.json",
+      "bytes": 1922,
+      "sha256": "949bb2f5a33bebb5c8de3f163dda5768157ab94320da7bafb10f4dce1971d2fa"
     },
     {
       "path": "contracts/hardhat.config.cjs",
-      "bytes": 1206,
-      "sha256": "434e980cd7fb8935e2a030fdd0d5f1b6c364f8ff66d935b815bca26b6f0223c5"
+      "bytes": 1367,
+      "sha256": "493fa39bbdd5ff6e69c62207a34666c6d42e44b3e769e6437bed5db34ffeecee"
     },
     {
       "path": "contracts/package-lock.json",
-      "bytes": 330107,
-      "sha256": "eb88d3bdf7cef38a33193ee7cbd80edf77a50a34bd6cf48f38de893fff851bc8"
+      "bytes": 143953,
+      "sha256": "126057bfb05f586bce6bb7fe7735addcb843b0bfd8b64426fdebb45311d7610a"
     },
     {
       "path": "contracts/package.json",
-      "bytes": 678,
-      "sha256": "2f484c5229b7428a4c834d58c8bbe933ee77a7f9e721ec3fa54e519adf082ae8"
+      "bytes": 1498,
+      "sha256": "1867dfa50f6dfe1e15c7dcd23ed13403895a9d62802a9179207dcd19a63e7e80"
     },
     {
       "path": "contracts/protocol/README.md",
-      "bytes": 8442,
-      "sha256": "e0b8253b5d1ade3e7e175329c225772e042cf9bcf94a8ab7f17988212c6a0af9"
+      "bytes": 8555,
+      "sha256": "9f4aa5e3178cc19e7fff247349ccda52f4b623f99aa4574024af10a0b46b7400"
     },
     {
       "path": "contracts/protocol/bindings.example.json",
@@ -4674,28 +4654,28 @@
     },
     {
       "path": "contracts/protocol/prepare-create.cjs",
-      "bytes": 6884,
-      "sha256": "b000808a1a38b058b4c2d4a67a9dca7127a1c7a3cc0b34dda5aa08c74577e82e"
+      "bytes": 8006,
+      "sha256": "90849e4bb2122678a8b388d3a5453503bc68e9df753fc20a1b716788b1ff20be"
     },
     {
       "path": "contracts/protocol/register-local.cjs",
-      "bytes": 5377,
-      "sha256": "03c171b3da0babddc4c49120cd0de090c03686ddd90c116f003fb6f249d5dc33"
+      "bytes": 6386,
+      "sha256": "fc402b9cd84f0f372b4fba7cf4e533beda0cced377a300a3b58c20aaa195d2c5"
     },
     {
       "path": "contracts/src/PiCurveModule.sol",
-      "bytes": 5262,
-      "sha256": "0f904a7a0858531b1db69511069582a88a1330b6132e13c92409deb8cc81e8df"
+      "bytes": 374,
+      "sha256": "f43b20b4fc160e80979165736cc9d859ac5343fab8192b7e05352959a0318476"
     },
     {
       "path": "contracts/src/PiMigrateModule.sol",
-      "bytes": 5114,
-      "sha256": "d9b0b401706b452db07781028ad7f2c6b4bef7eed4bcfa5aaedb0a445a2049f5"
+      "bytes": 364,
+      "sha256": "9130d58cc8f91e4d688e622f7af2c516f3483781f4369788ab4f4e2b7d9bf9b1"
     },
     {
       "path": "contracts/src/PiPresetValidator.sol",
-      "bytes": 3587,
-      "sha256": "cc91f509c0414b90ebf9e81b628fa36fbf8857193fee2ef93e658ea2f7471dec"
+      "bytes": 3563,
+      "sha256": "8a0694c14a6f5a60771be505ef77ef13940c142f29a2c829bd92b4479ab43c4a"
     },
     {
       "path": "contracts/src/PiRates.sol",
@@ -4704,13 +4684,13 @@
     },
     {
       "path": "contracts/src/PiRewards.sol",
-      "bytes": 10584,
-      "sha256": "3503d371fb847de8243634a00a798b860906a8de46cc86d4f80b3ce32b92914d"
+      "bytes": 1036,
+      "sha256": "c5dff0609fce5edbcaaedd1a4e87014ad444b156c01624b92053ea619d5d7ab5"
     },
     {
       "path": "contracts/src/PiToken.sol",
-      "bytes": 5375,
-      "sha256": "f03b2b732b08fed8cd01a1e6b69b6ee26ba305ddcd0ec238eabeede0bdbfce73"
+      "bytes": 2340,
+      "sha256": "8f775ecd2b9746e58a92afda1b14e7c8a2d17afaa31416afb3d11fc097c3dd8f"
     },
     {
       "path": "contracts/src/PiTokenModule.sol",
@@ -4724,8 +4704,8 @@
     },
     {
       "path": "contracts/src/PiTreasury.sol",
-      "bytes": 13506,
-      "sha256": "1eeb88def76ba01637fd84b92b4680117443259137223edaa3b944292dbf344f"
+      "bytes": 837,
+      "sha256": "40728520e47467db2b41f330467ab491a4a2d7cfc9940e6e8e0e449eefcb97ff"
     },
     {
       "path": "contracts/src/PiVault.sol",
@@ -4733,79 +4713,139 @@
       "sha256": "290328f5dd94500c83406db44088d76ae68615064c6e70005f6ca679df9d0fff"
     },
     {
+      "path": "contracts/src/common/AcquisitionToken.sol",
+      "bytes": 4116,
+      "sha256": "7db25c868923aab760491c9fea5a913a5caaecb43911e9b3d51b1cd22f28b948"
+    },
+    {
+      "path": "contracts/src/common/PancakeMigration.sol",
+      "bytes": 5206,
+      "sha256": "da2340b6b1aa056b316196d9dbde2b1ba4296b45d63c1647cce072198f5ff593"
+    },
+    {
+      "path": "contracts/src/common/RewardLedger.sol",
+      "bytes": 12009,
+      "sha256": "40b2212b7c7e7b660309bd42c3cbd4993a3ea7995905fcf888a63f5365c386b2"
+    },
+    {
+      "path": "contracts/src/common/Treasury.sol",
+      "bytes": 13901,
+      "sha256": "fd7cc1226ca6f6284cbe6f20a2140d303a539be747a5170812b22cc579e9b7aa"
+    },
+    {
+      "path": "contracts/src/common/VirtualReserveCurve.sol",
+      "bytes": 5349,
+      "sha256": "4cb14c4b2544321ff59d1c63c2185a7eab095c680f7141ee1ed1415ec4c16f3e"
+    },
+    {
       "path": "contracts/src/protocol/HoldConfig.sol",
-      "bytes": 1564,
-      "sha256": "92d65dccf97f5910bbb7aa76a2449474371013e2f8b3150581aec03a81935673"
+      "bytes": 1820,
+      "sha256": "4943d09adcd41061ff5da2754c4ddbc10caa97f0ad502fc3f74e6b492742f59d"
     },
     {
       "path": "contracts/src/protocol/HoldCurveModule.sol",
-      "bytes": 6029,
-      "sha256": "d5f0f496f74a698c681b8ef4dade0d6314a5f605439ce815dcd89914d59b561d"
+      "bytes": 1430,
+      "sha256": "bec0f3bd050d49c95b8d8f319abc5a409f1b916b92a5fdf0df0239c08573eb31"
     },
     {
       "path": "contracts/src/protocol/HoldMigrateModule.sol",
-      "bytes": 5528,
-      "sha256": "12b39a48032a5ff759d896f0ede3706f2cdd2837da87e66c2dea459662be427e"
+      "bytes": 824,
+      "sha256": "86d3dcb147c9487660a66581473397a562b87164caebf567f0fe56fbf1a92544"
     },
     {
       "path": "contracts/src/protocol/HoldPresetValidator.sol",
-      "bytes": 3751,
-      "sha256": "992093e74e1234c537c4518d787018c4edfacdf53068f291df508ff2fc460d1b"
+      "bytes": 3808,
+      "sha256": "41649a7f9ef83c03fc0477f4816cd2f750a5b100789511d1a23dba0c224b406b"
     },
     {
       "path": "contracts/src/protocol/HoldRewards.sol",
-      "bytes": 11471,
-      "sha256": "fd85d1b7bf245314b3358c055fea1d58360bcbc3d8a03016656ac5cb3708ba40"
+      "bytes": 2184,
+      "sha256": "1b2640fbd5b35c1eda0c769721cc663a39c8ff7b01189db490ab45bd02dcfac1"
     },
     {
       "path": "contracts/src/protocol/HoldToken.sol",
-      "bytes": 5514,
-      "sha256": "9fb4ad283339999554f0f904688b9b06cd2ab599cbc05c9f7d07401f1038cd97"
+      "bytes": 2563,
+      "sha256": "4ca612b04e38f114a3c9ea670e79f91ad86d6e10487a203f2d9ae36e984c83fc"
     },
     {
       "path": "contracts/src/protocol/HoldTokenModule.sol",
-      "bytes": 3735,
-      "sha256": "e42843ee2f8f5219ccc7393f36d53c23770a888fb7859b14ab9dbe5a1310c70a"
+      "bytes": 5074,
+      "sha256": "ea1cdcc81611963436da621590a6d47265dfae775dbfc3bca3184466e4b2981f"
     },
     {
       "path": "contracts/src/protocol/HoldTradeModule.sol",
-      "bytes": 2962,
-      "sha256": "2c33439f30a3851d415eb8fffde24cec9a5f6488120c62d653064fbf268023f2"
+      "bytes": 3480,
+      "sha256": "5c5e96a6ac65909ee864b46e5037b9c1261d3e4aa9365b93dafd2517f3dc7b3e"
     },
     {
       "path": "contracts/src/protocol/HoldTreasury.sol",
-      "bytes": 13957,
-      "sha256": "d783cd622eb2a8053721cbb5d103fa75a0fd26cbd114f6281e902708cf27e01b"
+      "bytes": 1203,
+      "sha256": "531e35d0ef4ca19b9a3b4e2d5ede6075c4beffa0f022d127787240b0d165574a"
     },
     {
       "path": "contracts/src/protocol/HoldVault.sol",
-      "bytes": 8329,
-      "sha256": "2e80d752d4cea860cb879418f47e75b40e83763b679fbd0678aa5112a6cd1f7b"
+      "bytes": 8899,
+      "sha256": "01104df71f9ad934e96db8b4a7bc104427e9891bab0763b72087fa3549df2ce5"
     },
     {
       "path": "contracts/src/test/CoreHarness.sol",
-      "bytes": 7746,
-      "sha256": "25058b044db066c270d61e701ac85129c97749307a6f54e7e1b6a5267ce026b6"
+      "bytes": 7996,
+      "sha256": "d72ff0a2afd4541f9c01eb0bdbfa6adf5958453813ea5496ab3fdfa4ba160ea7"
+    },
+    {
+      "path": "contracts/test/abi-baseline.json",
+      "bytes": 199353,
+      "sha256": "1168d86206a267e16a9e9562d4f6a9cee4346a211c49dbcea39fe6281d3378a0"
+    },
+    {
+      "path": "contracts/test/compatibility.test.cjs",
+      "bytes": 1250,
+      "sha256": "eb1bc9c2442c410fe8532c05cdb163f53c9978337ff1acf9f712b4d1da30760d"
     },
     {
       "path": "contracts/test/fixtures.cjs",
-      "bytes": 4770,
-      "sha256": "39b88d73e8bd46516eb13d7f955437dd30e0132b319e10d46aaad088a1baa6be"
+      "bytes": 100,
+      "sha256": "38ffcb104c5785f31cc8f88de9ccde8c7351347abcc5fd148eea1c29c46a83a6"
     },
     {
       "path": "contracts/test/pi.bnb.test.cjs",
-      "bytes": 20256,
-      "sha256": "141dd933134a85d12244078e3927b2a2239d532ec32b1590213c10f62f61c2c4"
+      "bytes": 224,
+      "sha256": "c6de00e00c566f69b15ba07afacc4a5cce5786c91eee4e0dd6ecfdab6f9192ef"
+    },
+    {
+      "path": "contracts/test/protocol-defaults.test.cjs",
+      "bytes": 262,
+      "sha256": "5758aa1db4d0e2ff695c4800c5b7b6176b75b3688b5ed56f4102f83cbd89021d"
     },
     {
       "path": "contracts/test/protocol-fixtures.cjs",
-      "bytes": 4895,
-      "sha256": "5288349911aee080294d6f3608e6a2d81f285975b18d819f0c6ecd4c405ed124"
+      "bytes": 102,
+      "sha256": "2b89bb1dd989b57ee844dc26e7eec8e94d99a81f4a8e75bcbdc9a43afa0fed06"
     },
     {
       "path": "contracts/test/protocol.test.cjs",
-      "bytes": 9016,
-      "sha256": "08322dfac8508d2d80f8b7828da608301cc76bd7ac7b21716a46e9ed1f217ca2"
+      "bytes": 10937,
+      "sha256": "61def419094bc6d2c29b1d20a6c43dc794d83fe408ccfd13a3a02bd652ddf5dd"
+    },
+    {
+      "path": "contracts/test/root-hooks.cjs",
+      "bytes": 2409,
+      "sha256": "2b58abde52ba7ce6e698c12c240680bb5e0f84d9fc4a0c712ac2326229928401"
+    },
+    {
+      "path": "contracts/test/shared/contracts.cjs",
+      "bytes": 21562,
+      "sha256": "273e8bfee28d88ea92e2ce83830076c1327f7a01525163382118dca62f0ccf46"
+    },
+    {
+      "path": "contracts/test/shared/fixtures.cjs",
+      "bytes": 6144,
+      "sha256": "335cc33079b110081f79ddb2322082e5498eb909b6542f3e224c597bf96994c3"
+    },
+    {
+      "path": "contracts/vendor/PROVENANCE.json",
+      "bytes": 2094,
+      "sha256": "a7398bf05eff42b77f7b190e2bed92a70d3b2542b532488a6611702c038fa83c"
     },
     {
       "path": "contracts/vendor/openfour/interfaces/IOpenFourCurveModule.sol",
@@ -4873,24 +4913,39 @@
       "sha256": "66f6f0f576294926ec48e1a49da9b9a9145a42b8c9aba20ae6951c5d2eb29f5d"
     },
     {
+      "path": "scripts/run-fork-tests.mjs",
+      "bytes": 1966,
+      "sha256": "46c7dac2b0640ba579910b2bd152580edaced09e08ece717072cffd214a253ed"
+    },
+    {
+      "path": "tests/economics.test.cjs",
+      "bytes": 2436,
+      "sha256": "79db1b1e89c25ec55bebcb33af1b5815de1dbb2b53011d2f3258d1dc1b40d286"
+    },
+    {
       "path": "tests/protocol-model.test.cjs",
-      "bytes": 3974,
-      "sha256": "c8945397a91b1ccfd689f3f5d7997a24f9b346a5bbd01a672be74f64e7eccc9c"
+      "bytes": 4657,
+      "sha256": "a88e801c4f16b346f2261fe4898aeb295e28a4598bfff27adf70efdd850eec03"
     },
     {
       "path": "verification.json",
-      "bytes": 1978,
-      "sha256": "29a6c62d79bfedfefc69bb6ee37b07501308eca88b7c41df43b79a7bb966b04e"
+      "bytes": 21435,
+      "sha256": "c776e4570f605d1aa7680c45f51363ec4300ee740ca030dc5213a480b11ad0d8"
+    },
+    {
+      "path": "website/economics.js",
+      "bytes": 2041,
+      "sha256": "1162c3dbc4a9bb1c1b68dd7ef1166307f25bc6dce5d6e404a4e834091ad7896d"
     },
     {
       "path": "website/protocol-model.js",
-      "bytes": 8728,
-      "sha256": "d23258dfb4fdcae43bf7e134a6b08cd9dadc850cd09ccd6af2de1a16292833da"
+      "bytes": 11855,
+      "sha256": "9d5e70d371c07b6b17706a2a945e3b2b287e02928f898b9bdd2766bb59a287fa"
     },
     {
       "path": "website/protocol-zip.js",
-      "bytes": 2378,
-      "sha256": "9b1388303f640ac0cbb0cb3854c9d8c6807297f5e7c634634fbf23f505c4252b"
+      "bytes": 3035,
+      "sha256": "43abe6e8b564e2fe6ffcc3fd13ee704872ef5bac9be9f3a735b9d62183a89302"
     }
   ]
 }

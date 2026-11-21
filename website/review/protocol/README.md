@@ -44,16 +44,17 @@ Treasury allocations use cumulative, separately floored integer proportions. The
 
 ## Compile and verify locally
 
-From the unpacked archive:
+Use Node.js 24. From the unpacked archive:
 
 ```sh
 cd contracts
 npm ci
 npm run compile
-PI_FORK_URL=YOUR_BNB_RPC PI_FORK_BLOCK=YOUR_ARCHIVE_BLOCK npx hardhat test test/protocol.test.cjs
+cd ..
+node scripts/run-fork-tests.mjs
 ```
 
-Use an archive-capable RPC for an old block. Public nodes may prune state quickly. `verification.json` records the exact tests and fork block used for this release. These tests use actual WBNB and PancakeSwap V2 on a local fork with the explicitly labelled `CoreHarness` settlement adapter. They do not certify official OpenFour Core integration, admission, production registration, keeper operation or independent security audit.
+The runner executes all shared, configurable and ABI checks against a recent BNB block. Set `PI_FORK_URL` and `PI_FORK_BLOCK` to reproduce a specific block. Use an archive-capable RPC for an old block. Public nodes may prune state quickly. `verification.json` records the exact tests and fork block used for this release. These tests use actual WBNB and PancakeSwap V2 on a local fork with the explicitly labelled `CoreHarness` settlement adapter. They do not certify official OpenFour Core integration, admission, production registration, keeper operation or independent security audit.
 
 `compiler-input.json` contains all compilation sources, including vendored OpenZeppelin. Contract artifacts and ABIs are included. Solidity 0.8.24, optimizer 200 runs, viaIR, EVM Paris.
 
