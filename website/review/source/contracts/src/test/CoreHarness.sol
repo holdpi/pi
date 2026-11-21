@@ -228,3 +228,12 @@ contract ClaimsReentry {
         require(!ok, "reentry succeeded");
     }
 }
+
+/// @dev Exposes an uninitialized helper clone for caller-authentication tests.
+contract UninitializedClone {
+    address public immutable instance;
+
+    constructor(address implementation) {
+        instance = Clones.clone(implementation);
+    }
+}
