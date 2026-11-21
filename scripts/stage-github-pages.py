@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Stage only the public website for GitHub Pages, including clean URL routes."""
+
 from pathlib import Path
 import re
 import shutil
