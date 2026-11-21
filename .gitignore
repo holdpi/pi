@@ -20,3 +20,7 @@ work/
 outputs/*
 !outputs/contract-verification.json
 .studio/
+
+.venv/
+.ruff_cache/
+*.zip.tmp

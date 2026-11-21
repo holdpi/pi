@@ -1,5 +1,11 @@
 * text=auto eol=lf
 
-# Preserve archived and published site bytes for digest and GitHub Pages comparisons.
+# Preserve recovered assets and review export bytes.
 /assets/original-site/** -text
 /website/** -text
+
+/assets/original-site/** linguist-vendored
+/contracts/vendor/** linguist-vendored
+/website/fonts/** linguist-vendored
+/website/review/** linguist-generated
+/outputs/** linguist-generated
