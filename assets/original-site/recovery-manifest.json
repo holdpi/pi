@@ -1,0 +1,83 @@
+{
+  "recovered_at": 1794760359,
+  "files": [
+    {
+      "url": "https://holdpi.com/",
+      "file": "index.html",
+      "bytes": 41854,
+      "content_type": "text/html; charset=UTF-8",
+      "sha256": "1b9149e80af012c6778092a5b3771f1b75c08837e97017b2f6b2f516979d6abf"
+    },
+    {
+      "url": "https://holdpi.com/brandbook",
+      "file": "brandbook.html",
+      "bytes": 52467,
+      "content_type": "text/html; charset=UTF-8",
+      "sha256": "f78f2ebf650859d49f6c555e3e60b436178cc3c032eeca12d181a93e8769da78"
+    },
+    {
+      "url": "https://holdpi.com/robots.txt",
+      "error": "HTTPError"
+    },
+    {
+      "url": "https://holdpi.com/sitemap.xml",
+      "error": "HTTPError"
+    },
+    {
+      "url": "https://holdpi.com/favicon.png",
+      "file": "favicon.png",
+      "bytes": 503211,
+      "content_type": "image/png",
+      "sha256": "7cda6c6c936a643b5191926b8da600b8d1833e74107bb89ea03668651a28945f"
+    },
+    {
+      "url": "https://holdpi.com/gate.css",
+      "file": "gate.css",
+      "bytes": 4717,
+      "content_type": "text/css; charset=UTF-8",
+      "sha256": "379f3658866b4a92130293d1451e9a4d10bc76f690aca20902bdd5d0b3a6cd37"
+    },
+    {
+      "url": "https://holdpi.com/gate.js",
+      "file": "gate.js",
+      "bytes": 3281,
+      "content_type": "application/javascript; charset=UTF-8",
+      "sha256": "7a88b65db73104a4b025db8f22cab14b92e7b160a0d19210c49ceebb1c212eaa"
+    },
+    {
+      "url": "https://holdpi.com/styles.css",
+      "file": "styles.css",
+      "bytes": 67843,
+      "content_type": "text/css; charset=UTF-8",
+      "sha256": "9248f8cebba0883bce34af5ba3235725cdec3e02190ac345d0276f191978692a"
+    },
+    {
+      "url": "https://holdpi.com/script.js",
+      "file": "script.js",
+      "bytes": 43564,
+      "content_type": "application/javascript; charset=UTF-8",
+      "sha256": "798fe23f29e12916f1dea146db382b7af0d34da3ccdd39f9b0ef95e1f8809fb4"
+    },
+    {
+      "url": "https://holdpi.com/brandbook.css",
+      "file": "brandbook.css",
+      "bytes": 49224,
+      "content_type": "text/css; charset=UTF-8",
+      "sha256": "ca9b62d2a803c341f9e1e971799f6381dc6cce93fe0f3592cc9df9bb06102810"
+    },
+    {
+      "url": "https://holdpi.com/brandbook.js",
+      "file": "brandbook.js",
+      "bytes": 2751,
+      "content_type": "application/javascript; charset=UTF-8",
+      "sha256": "d7b577ae69ecc031af910af70b70bab8bf9faf97a475c26606375feb2aea12cb"
+    },
+    {
+      "url": "https://holdpi.com/%23n",
+      "file": "%23n.html",
+      "bytes": 41854,
+      "content_type": "text/html; charset=UTF-8",
+      "sha256": "1b9149e80af012c6778092a5b3771f1b75c08837e97017b2f6b2f516979d6abf"
+    }
+  ]
+}
