@@ -1,0 +1,109 @@
+{
+  "version": "Base v1 economic specification, candidate 1",
+  "status": "Agent recommendation. Core incentive and Base target are user-directed; these specific parameters are not yet user-approved.",
+  "objective": "Early exits fund patient holders. All reward liabilities remain funded by received assets.",
+  "network": "Base EVM",
+  "token": {
+    "standard": "ERC-20 with explicitly non-standard transfer fees",
+    "symbol": "PI, subject to naming decision",
+    "supply": 1000000000,
+    "decimals": 18,
+    "minting": "One genesis mint; no subsequent inflation",
+    "initial_allocation": "All token supply allocated to initial public liquidity via a single-use launch escrow; seed WETH is a separate launch input. No presale or team token allocation in this proposed design."
+  },
+  "fees": {
+    "buy_bps": 300,
+    "exit_max_bps": 1500,
+    "exit_floor_bps": 300,
+    "exit_rate_bps": "300 + floor(1200 * max(0, 7 - completed_holding_days) / 7)",
+    "calculation": "Compute tax on each consumed age cohort; sum fee amounts. Token atomic-unit rounding is retained explicitly.",
+    "exit_definition": "A positive transfer out of an ordinary holder address to another address, including a sale, gift, own-wallet move or unregistered pool. Zero transfers and self-transfers are no-ops for fees and age.",
+    "tax_order": "Most recent cohorts consumed first; fully mature inventory is consumed last.",
+    "canonical_pair": "One fixed, verified v2-style PI/WETH pair using fee-on-transfer-compatible routes. Pair output incurs the 3% buy fee. No v3 compatibility claim.",
+    "exceptions": "Only narrowly defined internal processing and initial-liquidity operations. No fee-exempt EOAs or arbitrary forwarding/rescue route for protected assets.",
+    "additional_costs": "AMM fees, network gas and price impact are separate from token taxes."
+  },
+  "age_accounting": {
+    "unit": "Completed UTC-day epochs, conservatively rounded",
+    "birth_epoch": "ceil(receipt_timestamp / 86400)",
+    "completed_days": "max(0, floor(current_timestamp / 86400) - birth_epoch)",
+    "timing": "Every maturity threshold takes at least its stated number of 24-hour days, and up to just under one extra day. Exact tier-change timestamps must be displayed.",
+    "topups": "Only the new net receipt enters a fresh cohort. Existing cohorts and earned WETH stay intact.",
+    "transfers": "Sender pays the applicable exit fee; recipient net tokens start a new age. Age is never forwarded.",
+    "state_bound": "At most 31 active daily cohorts plus one mature balance per wallet. All cohorts older than 30 earned days share identical final rules and merge lazily.",
+    "lookup_bound": "No iteration over the holder population; at most 31 cohorts per touched wallet, plus global cohort maintenance."
+  },
+  "rewards": {
+    "asset": "WETH on Base. Claim may unwrap to native ETH; WETH remains a fallback for recipients that reject ETH.",
+    "weights": [
+      {
+        "completed_days_min": 0,
+        "multiplier": 0
+      },
+      {
+        "completed_days_min": 1,
+        "multiplier": 1
+      },
+      {
+        "completed_days_min": 7,
+        "multiplier": 1.5
+      },
+      {
+        "completed_days_min": 30,
+        "multiplier": 2.5
+      }
+    ],
+    "formula": "R_i = received_WETH_reward_pool * sum(balance_i_cohort * cohort_multiplier) / sum(all_eligible_balance_cohort * cohort_multiplier)",
+    "eligibility": "Warm-up cohorts, canonical AMM, fee processor, token escrow, reward vault, launch escrow, operations vault and burn addresses are excluded.",
+    "ownership_timing": "WETH allocations belong to the eligible balances at the settled funding event. Being present when a tax was collected does not create an earlier native-asset entitlement.",
+    "settlement": "Target hourly permissionless fee processing, subject to collected fees, conservative swap bounds and execution. The contract does not wake itself. Pending tax inventory and last settlement are visible.",
+    "withdrawal": "Earned WETH can be claimed at any time. Claiming or selling does not erase previously credited rewards. No expiry, auto-compounding or fixed APY.",
+    "payout_automation": "Optional bounded claim-for batches pay the recorded beneficiary. Users retain direct claims; automatic hourly pushes to every wallet are not promised.",
+    "empty_eligibility": "Assets stay in an unallocated reserve and are included when eligible weight exists. The operator cannot withdraw them.",
+    "rounding": "High-precision cumulative indices, persistent per-account fractional remainders, and a recycled rounding reserve. All rounding must remain in the conservation equation.",
+    "implementation": "Global cohort reward indices and a mature-cohort index. Save final cohort indices and merge-index references so inactive wallets can settle old rewards without a trusted Merkle publisher."
+  },
+  "tax_allocation": {
+    "holders_pct": 85,
+    "liquidity_pct": 10,
+    "operations_pct": 5,
+    "scope": "Percentages of collected token fees, not percentages of trade value.",
+    "processing": "Retain 5% of fee tokens for the token side of liquidity. Swap 95% within bounds; allocate actual WETH output in ratios 85:5:5 to rewards, liquidity quote side and operations. Use the retained tokens and liquidity WETH to add liquidity; unused liquidity assets carry forward.",
+    "lp_custody": "Initial and protocol-added LP positions are permanently locked under a verifiable immutable arrangement.",
+    "operations_custody": "Only the explicit 5% allocation goes to a disclosed operations treasury. Its multisig can spend that treasury, not holder rewards or locked liquidity. This is a protocol fee, not a claim that all fees return to participants.",
+    "supply_effect": "Fees transfer existing tokens. No token mint, rebase or promise of price support."
+  },
+  "controls": {
+    "token": "Fixed supply and immutable fee bounds, maturation rules and canonical-pair identity after one-time initialization. No arbitrary blacklist or owner ability to raise exit fees.",
+    "rewards": "No admin withdrawal of reward assets; claims independently available if the keeper stops.",
+    "processing": "Fee processing can fail or pause without blocking ordinary sells or transfers. The liquidity pool can still have economic slippage; this is not an exit-price guarantee.",
+    "swaps": "Bound batch sizes, deadlines, minimum received amounts and price impact; validate manipulation resistance against the selected pool. Do not swap the full treasury blindly on every trade."
+  },
+  "scope_limits": [
+    "The token can enforce underlying-token movements. It cannot observe CEX internal trades, wrapper-share trades, or sale of a wallet/key. Do not advertise globally unavoidable taxes on every change of economic ownership.",
+    "An unregistered pool may incur exit tax on both legs and is not a supported trading route.",
+    "The multiplier redistributes a finite pool. It does not multiply aggregate yield. Volume and token price are market outcomes, not contract guarantees.",
+    "The daily-epoch compromise is deliberate. Exact-to-the-second lot ageing is not the chosen v1 specification."
+  ],
+  "website_replacements": {
+    "network": "Base",
+    "reward_asset": "ETH / WETH",
+    "buy_tax": "3%",
+    "exit_tax": "3% to 15%",
+    "headline": "EARLY EXITS PAY HOLDERS.",
+    "subline": "Trading fees fund ETH rewards. Older holdings earn a larger share and pay less to exit.",
+    "distribution": "Rewards are credited after fee settlement. Claim ETH when available.",
+    "holding_age": "Each purchase has its own age. Adding tokens preserves existing progress.",
+    "transfers": "Moving tokens to another wallet is an exit and starts a new holding clock for the received tokens.",
+    "calculator": "Use actual eligible weighted supply, the quoted amount-specific exit fee, current funded assets and separately labelled volume scenarios. No fixed annual income promise."
+  },
+  "required_before_mainnet": [
+    "Approved parameter selection",
+    "Complete Solidity implementation and independent security review",
+    "Foundry invariants, fuzzing, rounding and worst-case gas checks",
+    "Fork tests of the exact Base pair/router including liquidity, flash swaps and failed fee processing",
+    "Fee-processor MEV and price-impact testing",
+    "Chosen seed liquidity, disclosed treasury and verified LP custody",
+    "Verified Base Sepolia end-to-end flow followed by a separate authorized mainnet launch"
+  ]
+}
