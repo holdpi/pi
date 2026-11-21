@@ -1,6 +1,6 @@
 # Four.meme integration review
 
-HoldPI proposes a custom preset because acquisition-age tax and loyalty require token-level bookkeeping. The configurable preset version in this package is `1.0.0-review`. For module source and encoding, start with [the protocol README](../contracts/protocol/README.md) and [the OpenFour developer guide](https://github.com/four-meme-community/openfour-docs/blob/8ca5554df22ad511126d8547c212fa161ecf19ee/docs/developer-guide.md).
+HoldPI proposes a custom preset because acquisition-age tax and loyalty require token-level bookkeeping. The configurable preset version in this package is `1.1.0-review`. For module source and encoding, start with [the protocol README](../contracts/protocol/README.md) and [the OpenFour developer guide](https://github.com/four-meme-community/openfour-docs/blob/8ca5554df22ad511126d8547c212fa161ecf19ee/docs/developer-guide.md).
 
 ## Composition and parameters
 
