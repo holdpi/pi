@@ -1,0 +1,24 @@
+[build]
+  publish = "website"
+
+[[redirects]]
+  from = "/docs"
+  to = "/docs.html"
+  status = 200
+
+[[redirects]]
+  from = "/brandbook"
+  to = "/brandbook.html"
+  status = 200
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/review/holdpi-bnb-review.zip"
+  [headers.values]
+    Content-Disposition = "attachment; filename=\"holdpi-bnb-review.zip\""
