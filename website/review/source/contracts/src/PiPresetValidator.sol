@@ -4,8 +4,7 @@ import {Math} from "@openzeppelin/contracts/utils/math/Math.sol";
 import {IOpenFourPresetValidator} from "../vendor/openfour/interfaces/IOpenFourPresetValidator.sol";
 import {OpenFourTypes} from "../vendor/openfour/libraries/OpenFourTypes.sol";
 import {PiToken} from "./PiToken.sol";
-import {PiCurveModule} from "./PiCurveModule.sol";
-import {PiMigrateModule} from "./PiMigrateModule.sol";
+import {VirtualReserveCurve} from "./common/VirtualReserveCurve.sol";
 
 /// @notice Deployment-specific bindings must be reviewed with the preset registry.
 contract PiPresetValidator is IOpenFourPresetValidator {
@@ -71,9 +70,9 @@ contract PiPresetValidator is IOpenFourPresetValidator {
                 t.operations != address(0),
             "PI: trusted components"
         );
-        PiCurveModule.Config memory c = abi.decode(
+        VirtualReserveCurve.Config memory c = abi.decode(
             p.curveParams,
-            (PiCurveModule.Config)
+            (VirtualReserveCurve.Config)
         );
         require(
             c.virtualToken > p.saleAmount &&
