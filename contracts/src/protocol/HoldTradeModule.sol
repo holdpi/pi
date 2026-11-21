@@ -31,7 +31,10 @@ contract HoldTradeModule is
         string calldata version_
     ) external initializer {
         require(
-            msg.sender == core && token != address(0) && core != address(0) && params.length == 0,
+            msg.sender == core &&
+                token != address(0) &&
+                core != address(0) &&
+                params.length == 0,
             "HOLD: trade config"
         );
         boundToken = token;
@@ -41,13 +44,36 @@ contract HoldTradeModule is
     function evaluate(
         OpenFourTypes.TradeContext calldata c
     ) external view returns (OpenFourTypes.TradeResult memory) {
-        if(c.token != boundToken || c.trader == address(0) || c.amount == 0)
-            return OpenFourTypes.TradeResult(false, 0, 0, new OpenFourTypes.FeeTier[](0), abi.encodeWithSelector(OpenFourTypes.TradeNotAllowed.selector));
+        if (c.token != boundToken || c.trader == address(0) || c.amount == 0)
+            return
+                OpenFourTypes.TradeResult(
+                    false,
+                    0,
+                    0,
+                    new OpenFourTypes.FeeTier[](0),
+                    abi.encodeWithSelector(
+                        OpenFourTypes.TradeNotAllowed.selector
+                    )
+                );
         uint256 rate;
-        if(c.isBuy) rate = IHoldTradeToken(boundToken).buyFeeRate();
+        if (c.isBuy) rate = IHoldTradeToken(boundToken).buyFeeRate();
         else {
-            try IHoldTradeToken(boundToken).exitFeeBps(c.trader, c.amount) returns (uint256 r) { rate = r; }
-            catch { return OpenFourTypes.TradeResult(false, 0, 0, new OpenFourTypes.FeeTier[](0), abi.encodeWithSelector(OpenFourTypes.TradeNotAllowed.selector)); }
+            try
+                IHoldTradeToken(boundToken).exitFeeBps(c.trader, c.amount)
+            returns (uint256 r) {
+                rate = r;
+            } catch {
+                return
+                    OpenFourTypes.TradeResult(
+                        false,
+                        0,
+                        0,
+                        new OpenFourTypes.FeeTier[](0),
+                        abi.encodeWithSelector(
+                            OpenFourTypes.TradeNotAllowed.selector
+                        )
+                    );
+            }
         }
         OpenFourTypes.FeeTier[] memory fees = new OpenFourTypes.FeeTier[](1);
         fees[0] = OpenFourTypes.FeeTier(

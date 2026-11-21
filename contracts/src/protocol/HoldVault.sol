@@ -1,7 +1,10 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.24;
 import {IOpenFourModuleSchema} from "../../vendor/openfour/interfaces/IOpenFourModuleSchema.sol";
-import {ParamDescriptor, ModuleEncodeSchema} from "../../vendor/openfour/libraries/OpenFourTypes.sol";
+import {
+    ParamDescriptor,
+    ModuleEncodeSchema
+} from "../../vendor/openfour/libraries/OpenFourTypes.sol";
 
 import {Initializable} from "@openzeppelin/contracts/proxy/utils/Initializable.sol";
 import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
@@ -40,10 +43,10 @@ contract HoldVault is Initializable, IOpenFourVault, IOpenFourModuleSchema {
 
     // ── Bonding curve state (curve module reads these for pricing) ─────────────
     OpenFourTypes.Phase public override phase;
-    uint256 public override totalRaised;           // quote credited to the curve (excludes anti-sniper slice)
+    uint256 public override totalRaised; // quote credited to the curve (excludes anti-sniper slice)
     uint256 public override antiSniperQuoteAccrued; // quote kept in vault for anti-sniper; not in totalRaised
     uint256 public override initialSaleAmount;
-    uint256 public override remainingForSale;       // tokens still sellable from vault inventory
+    uint256 public override remainingForSale; // tokens still sellable from vault inventory
 
     bytes private _initParams;
     string private _moduleVersion;
@@ -54,7 +57,10 @@ contract HoldVault is Initializable, IOpenFourVault, IOpenFourModuleSchema {
     }
 
     modifier onlyMigrationModule() {
-        require(msg.sender == migrateModule, "TaxBondingVault: only migration module");
+        require(
+            msg.sender == migrateModule,
+            "TaxBondingVault: only migration module"
+        );
         _;
     }
 
@@ -72,13 +78,22 @@ contract HoldVault is Initializable, IOpenFourVault, IOpenFourModuleSchema {
         bytes calldata vaultParams,
         string calldata moduleVersion_
     ) external override initializer {
-        require(fourCore_ != address(0) && token_ != address(0), "TaxBondingVault: zero address");
+        require(
+            fourCore_ != address(0) && token_ != address(0),
+            "TaxBondingVault: zero address"
+        );
 
         _initParams = vaultParams;
         _moduleVersion = moduleVersion_;
-        require(tokenParams.saleAmount > 0, "TaxBondingVault: bad initial sale");
+        require(
+            tokenParams.saleAmount > 0,
+            "TaxBondingVault: bad initial sale"
+        );
         // Tax bonding preset requires an ERC-20 quote; native-only quote is not supported here.
-        require(tokenParams.quoteAsset != address(0), "TaxBondingVault: quote must be ERC20");
+        require(
+            tokenParams.quoteAsset != address(0),
+            "TaxBondingVault: quote must be ERC20"
+        );
 
         tokenAddress = token_;
         fourCore = fourCore_;
@@ -92,22 +107,38 @@ contract HoldVault is Initializable, IOpenFourVault, IOpenFourModuleSchema {
         creator = creator_;
     }
 
-    function descriptor() external view override returns (bytes8 tagId, string memory tag, string memory version) {
+    function descriptor()
+        external
+        view
+        override
+        returns (bytes8 tagId, string memory tag, string memory version)
+    {
         tag = "module.vault.holdpi_bonding";
         return (bytes8(keccak256(bytes(tag))), tag, _moduleVersion);
     }
 
     /// @inheritdoc IOpenFourVault
-    function onBuy(OpenFourTypes.VaultTradeParams calldata p)
+    function onBuy(
+        OpenFourTypes.VaultTradeParams calldata p
+    )
         external
         override
         onlyFourCore
         returns (uint256 newTotalRaised, uint256 newRemainingForSale)
     {
-        require(phase == OpenFourTypes.Phase.Trading, "TaxBondingVault: bad phase");
+        require(
+            phase == OpenFourTypes.Phase.Trading,
+            "TaxBondingVault: bad phase"
+        );
         require(p.trader != address(0), "TaxBondingVault: zero buyer");
-        require(p.tokenAmount > 0 && p.curveQuote > 0, "TaxBondingVault: bad amount");
-        require(remainingForSale >= p.tokenAmount, "TaxBondingVault: insufficient sale");
+        require(
+            p.tokenAmount > 0 && p.curveQuote > 0,
+            "TaxBondingVault: bad amount"
+        );
+        require(
+            remainingForSale >= p.tokenAmount,
+            "TaxBondingVault: insufficient sale"
+        );
 
         remainingForSale -= p.tokenAmount;
         totalRaised += p.curveQuote;
@@ -121,20 +152,34 @@ contract HoldVault is Initializable, IOpenFourVault, IOpenFourModuleSchema {
     }
 
     /// @inheritdoc IOpenFourVault
-    function onSell(OpenFourTypes.VaultTradeParams calldata p)
+    function onSell(
+        OpenFourTypes.VaultTradeParams calldata p
+    )
         external
         override
         onlyFourCore
         returns (uint256 newTotalRaised, uint256 newRemainingForSale)
     {
-        require(phase == OpenFourTypes.Phase.Trading, "TaxBondingVault: bad phase");
+        require(
+            phase == OpenFourTypes.Phase.Trading,
+            "TaxBondingVault: bad phase"
+        );
         require(p.trader != address(0), "TaxBondingVault: zero seller");
-        require(p.tokenAmount > 0 && p.curveQuote > 0, "TaxBondingVault: bad amount");
-        require(p.curveQuote >= p.antiSniperQuote, "TaxBondingVault: bad anti sniper");
+        require(
+            p.tokenAmount > 0 && p.curveQuote > 0,
+            "TaxBondingVault: bad amount"
+        );
+        require(
+            p.curveQuote >= p.antiSniperQuote,
+            "TaxBondingVault: bad anti sniper"
+        );
 
         uint256 bondingQuote = p.curveQuote - p.antiSniperQuote;
         remainingForSale += p.tokenAmount;
-        require(totalRaised >= bondingQuote, "TaxBondingVault: raised underflow");
+        require(
+            totalRaised >= bondingQuote,
+            "TaxBondingVault: raised underflow"
+        );
         totalRaised -= bondingQuote;
         antiSniperQuoteAccrued += p.antiSniperQuote;
 
@@ -143,7 +188,9 @@ contract HoldVault is Initializable, IOpenFourVault, IOpenFourModuleSchema {
         return (totalRaised, remainingForSale);
     }
 
-    function setPhase(OpenFourTypes.Phase newPhase) external override onlyFourCore {
+    function setPhase(
+        OpenFourTypes.Phase newPhase
+    ) external override onlyFourCore {
         phase = newPhase;
         OpenFourToken(token).setPhase(newPhase);
     }
@@ -152,21 +199,34 @@ contract HoldVault is Initializable, IOpenFourVault, IOpenFourModuleSchema {
         return false;
     }
 
-    function collectSellAsset(address, uint256, bytes calldata) external pure override {
+    function collectSellAsset(
+        address,
+        uint256,
+        bytes calldata
+    ) external pure override {
         revert("TaxBondingVault: sellViaVault disabled");
     }
 
     /// @dev Core pulls protocol/tax/dev fees and pays curve quote into this vault during trades.
-    function transferQuote(address to, uint256 amount) external override onlyFourCore {
+    function transferQuote(
+        address to,
+        uint256 amount
+    ) external override onlyFourCore {
         SafeERC20.safeTransfer(IERC20(quoteAsset), to, amount);
     }
 
-    function transferQuoteForMigration(address to, uint256 amount) external override onlyMigrationModule {
+    function transferQuoteForMigration(
+        address to,
+        uint256 amount
+    ) external override onlyMigrationModule {
         require(to != address(0), "TaxBondingVault: zero recipient");
         SafeERC20.safeTransfer(IERC20(quoteAsset), to, amount);
     }
 
-    function transferTokenForMigration(address to, uint256 amount) external override onlyMigrationModule {
+    function transferTokenForMigration(
+        address to,
+        uint256 amount
+    ) external override onlyMigrationModule {
         require(to != address(0), "TaxBondingVault: zero recipient");
         SafeERC20.safeTransfer(IERC20(token), to, amount);
     }
@@ -188,7 +248,11 @@ contract HoldVault is Initializable, IOpenFourVault, IOpenFourModuleSchema {
     }
 
     receive() external payable {}
-    function moduleEncodeSchema() external pure returns (ModuleEncodeSchema memory) {
+    function moduleEncodeSchema()
+        external
+        pure
+        returns (ModuleEncodeSchema memory)
+    {
         return ModuleEncodeSchema("vault", 1, new ParamDescriptor[](0));
     }
 }
