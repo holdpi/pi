@@ -1,0 +1,23 @@
+{
+  "name": "holdpi-bnb-review",
+  "version": "0.2.0",
+  "private": true,
+  "description": "PI acquisition-age tax and funded BNB rewards, OpenFour review source",
+  "scripts": {
+    "compile": "hardhat compile",
+    "test": "hardhat test",
+    "format": "prettier --plugin=prettier-plugin-solidity --write \"src/**/*.sol\" \"test/*.cjs\""
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^5.0.0",
+    "hardhat": "^2.22.0",
+    "prettier": "3.6.2",
+    "prettier-plugin-solidity": "2.4.1",
+    "solc": "0.8.24"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "4.9.6",
+    "@openzeppelin/contracts-upgradeable": "4.9.6",
+    "dotenv": "^17.4.1"
+  }
+}
