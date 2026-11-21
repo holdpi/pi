@@ -1,5 +1,6 @@
 const path = require("node:path");
-require("@nomicfoundation/hardhat-toolbox");
+require("@nomicfoundation/hardhat-ethers");
+require("@nomicfoundation/hardhat-chai-matchers");
 const { subtask } = require("hardhat/config");
 const {
   TASK_COMPILE_SOLIDITY_GET_SOLC_BUILD,
@@ -15,7 +16,11 @@ subtask(TASK_COMPILE_SOLIDITY_GET_SOLC_BUILD).setAction(
 module.exports = {
   solidity: {
     version: "0.8.24",
-    settings: { optimizer: { enabled: true, runs: 200 }, viaIR: true },
+    settings: {
+      optimizer: { enabled: true, runs: 200 },
+      viaIR: true,
+      evmVersion: "paris",
+    },
   },
   defaultNetwork: "hardhat",
   networks: {
@@ -39,5 +44,8 @@ module.exports = {
     cache: path.join(__dirname, "cache"),
     artifacts: path.join(__dirname, "artifacts"),
   },
-  mocha: { timeout: 120000 },
+  mocha: {
+    timeout: 120000,
+    rootHooks: require("./test/root-hooks.cjs").mochaHooks,
+  },
 };
