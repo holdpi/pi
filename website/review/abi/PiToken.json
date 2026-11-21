@@ -639,7 +639,7 @@
     "name": "rewards",
     "outputs": [
       {
-        "internalType": "contract PiRewards",
+        "internalType": "contract RewardLedger",
         "name": "",
         "type": "address"
       }
@@ -845,7 +845,7 @@
     "name": "treasury",
     "outputs": [
       {
-        "internalType": "contract PiTreasury",
+        "internalType": "contract Treasury",
         "name": "",
         "type": "address"
       }
