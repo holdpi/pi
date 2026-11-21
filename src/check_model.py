@@ -1,8 +1,9 @@
 """Deterministic economic scenarios and randomized ledger invariants."""
+
 import json
 import random
 from pathlib import Path
-from epoch_model import Model, DAY, TOKEN, PRECISION, exit_bps, birth_epoch
+from epoch_model import Model, DAY, TOKEN, exit_bps, birth_epoch
 
 
 def paid_close(actual, expected):
@@ -105,7 +106,9 @@ def run():
     assert exit_bps(7) == 300
     assert exit_bps(300) == 300
     assert all(exit_bps(d + 1) <= exit_bps(d) for d in range(40))
-    passed.append("Conservative epoch rounding never grants a tier early; exit fee stays within 3%-15%")
+    passed.append(
+        "Conservative epoch rounding never grants a tier early; exit fee stays within 3%-15%"
+    )
 
     m = Model()
     for day in range(100):
@@ -114,7 +117,9 @@ def run():
         m.fund_rewards(TOKEN)
         m.audit()
     assert len(m.account("daily").lots) <= 31
-    passed.append("Daily top-ups across 100 days remain bounded to 31 active cohorts plus mature balance")
+    passed.append(
+        "Daily top-ups across 100 days remain bounded to 31 active cohorts plus mature balance"
+    )
 
     def layered_position():
         item = Model()
@@ -139,7 +144,9 @@ def run():
     fee = m.transfer("unregistered_pool", "buyer", m.account("unregistered_pool").balance)
     assert fee > 0
     m.audit()
-    passed.append("An unregistered intermediary remains subject to exit fees; transfers cannot create mature weight")
+    passed.append(
+        "An unregistered intermediary remains subject to exit fees; transfers cannot create mature weight"
+    )
 
     rng = random.Random(314159)
     m = Model()
@@ -164,7 +171,9 @@ def run():
             m.advance(m.now + rng.randrange(0, 2 * DAY))
         receipt = m.audit()
         max_cohorts = max(max_cohorts, receipt["max_wallet_active_cohorts"])
-    passed.append("5,000 randomized buys, sells, transfers, claims, fundings and time jumps conserve supply and rewards")
+    passed.append(
+        "5,000 randomized buys, sells, transfers, claims, fundings and time jumps conserve supply and rewards"
+    )
 
     return {
         "status": "pass",
