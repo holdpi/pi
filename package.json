@@ -1,0 +1,25 @@
+{
+  "name": "holdpi-audit",
+  "private": true,
+  "version": "0.3.0",
+  "engines": {
+    "node": ">=24 <25"
+  },
+  "scripts": {
+    "setup": "npm --prefix contracts ci",
+    "test": "node --test tests/*.test.cjs",
+    "test:models": "python3 src/check_model.py && python3 src/pi_bnb_v2.py",
+    "test:contracts": "node scripts/run-fork-tests.mjs",
+    "compile": "npm --prefix contracts run compile",
+    "format": "npm --prefix contracts run format",
+    "format:check": "npm --prefix contracts run format:check",
+    "verify": "python3 scripts/verify-review.py",
+    "check": "npm run format:check && npm run check:dependencies && npm run check:python && npm test && npm run test:models && npm run compile && npm run test:abi && npm run verify",
+    "preview": "node scripts/serve.mjs",
+    "package:review": "python3 scripts/protocol/build-package.py && python3 scripts/build-review.py",
+    "check:python": "python3 -m ruff check scripts src && python3 -m ruff format --check scripts src",
+    "compile:clean": "npm --prefix contracts run clean && npm run compile",
+    "test:abi": "npm --prefix contracts run test:abi",
+    "check:dependencies": "npm --prefix contracts audit --audit-level=moderate"
+  }
+}

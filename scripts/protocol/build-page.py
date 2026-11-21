@@ -1,45 +1,256 @@
 from pathlib import Path
-root=Path(__file__).resolve().parents[2]
-original=(root/'website/index.html').read_text()
-fx=original[original.index('  <!-- scroll progress'):original.index('  <!-- system status bar')]
-heroart=original[original.index('        <div class="pi-display">'):original.index('      </aside>')].replace('TIME-WEIGHTED REDISTRIBUTION','ONE PROTOCOL. MANY MODELS.').replace('v0.1.0','OPENFOUR').replace('// $π','// HOLDPI_PROTOCOL')
-def slider(key,title,lo,hi,value,step=1,unit='',hint=''):
- return f'''<div class="p-control"><label for="p-{key}"><span>{title}</span><output id="o-{key}" for="p-{key}">{value}{unit}</output></label><input id="p-{key}" data-key="{key}" type="range" min="{lo}" max="{hi}" step="{step}" value="{value}" aria-describedby="h-{key}"/><div class="p-range-ends"><span>{lo}{unit}</span><span>{hi}{unit}</span></div><p id="h-{key}" class="p-hint">{hint}</p></div>'''
-def field(key,title,value,typ='number',extra=''):
- return f'<label class="p-field" for="p-{key}"><span>{title}</span><input id="p-{key}" data-key="{key}" type="{typ}" value="{value}" {extra}/></label>'
-html='''<!doctype html>
+
+root = Path(__file__).resolve().parents[2]
+original = (root / "website/index.html").read_text()
+fx = original[original.index("  <!-- scroll progress") : original.index("  <!-- system status bar")]
+heroart = (
+    original[original.index('        <div class="pi-display">') : original.index("      </aside>")]
+    .replace("TIME-WEIGHTED REDISTRIBUTION", "ONE PROTOCOL. MANY MODELS.")
+    .replace("v0.1.0", "OPENFOUR")
+    .replace("// $π", "// HOLDPI_PROTOCOL")
+)
+
+
+def slider(key, title, lo, hi, value, step=1, unit="", hint=""):
+    return f'''<div class="p-control"><label for="p-{key}"><span>{title}</span><output id="o-{key}" for="p-{key}">{value}{unit}</output></label><input id="p-{key}" data-key="{key}" type="range" min="{lo}" max="{hi}" step="{step}" value="{value}" aria-describedby="h-{key}"/><div class="p-range-ends"><span>{lo}{unit}</span><span>{hi}{unit}</span></div><p id="h-{key}" class="p-hint">{hint}</p></div>'''
+
+
+def field(key, title, value, typ="number", extra=""):
+    return f'<label class="p-field" for="p-{key}"><span>{title}</span><input id="p-{key}" data-key="{key}" type="{typ}" value="{value}" {extra}/></label>'
+
+
+html = (
+    """<!doctype html>
 <html lang="en" class="is-unlocked">
 <head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="robots" content="noindex,nofollow"/>
 <title>π - Protocol Builder</title><meta name="description" content="Design a token's buy tax, purchase-age sell curve, BNB rewards and treasury splits. Preview the economics and export an OpenFour protocol configuration and Solidity package."/>
 <link rel="icon" href="/favicon.png"/><link rel="stylesheet" href="/fonts.css"/><link rel="stylesheet" href="/styles.css"/><link rel="stylesheet" href="/protocol.css"/><link rel="stylesheet" href="/social.css"/>
 <script defer src="/protocol-model.js"></script><script defer src="/protocol-zip.js"></script><script defer src="/script.js"></script><script defer src="/protocol.js"></script></head>
-<body class="protocol-page">'''+fx+'''
+<body class="protocol-page">"""
+    + fx
+    + """
 <div class="sysbar"><div class="sysbar-inner"><div class="sysbar-l"><span class="sb-app">// BUILD</span><span class="sb-sep">·</span><span class="sb-net">BNB · OPENFOUR</span></div><div class="sysbar-r"><span id="sb-clock"></span><span class="led led-sm"></span></div></div></div>
 <header class="top"><div class="top-inner"><a class="brand" href="/"><span class="mark">π</span><span class="brand-name">PASSIVE_INCOME</span><span class="brand-tic">[ PROTOCOL ]</span></a><nav class="nav" aria-label="Protocol sections"><a class="nav-item" href="#taxes">(01) TAX</a><a class="nav-item" href="#payouts">(02) PAYOUTS</a><a class="nav-item" href="#treasury">(03) SPLIT</a><a class="nav-item" href="#results">(04) RESULT</a></nav><div class="top-actions"><a class="social-x" href="https://x.com/hold_pi" target="_blank" rel="noopener noreferrer" aria-label="HoldPI on X (opens in a new tab)" title="@hold_pi on X"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.64 7.584H.47l8.6-9.835L0 1.154h7.594l5.243 6.932 6.064-6.933Zm-1.29 19.49h2.039L6.487 3.24H4.3l13.31 17.403Z"/></svg></a><a class="cta-mini" href="#deploy">BUILD TOKEN →</a></div></div></header>
 <div class="p-status"><div class="container"><span><span class="led led-sm"></span> PROTOCOL BUILDER</span><span id="p-autosave">SAVED ON THIS DEVICE</span><button id="p-reset" type="button">RESET TO PI ↺</button></div></div>
 <main>
-<section class="hero" id="builder"><div class="hero-grid"><div class="hero-left"><div class="hero-num">(00) - DESIGN_THE_INCENTIVE</div><h1 class="hero-title">YOUR TOKEN.<br/>YOUR <span class="hl hl-lime">RULES.</span></h1><p class="hero-sub">Set the cost of an early exit. Choose how patience gets rewarded. One configurable protocol, with a different model for every token.</p><div class="hero-actions"><a class="btn btn-pri" href="#taxes">DESIGN YOUR MODEL →</a><a class="btn" href="#deploy">CONTRACT &amp; LAUNCH</a></div><div class="contract p-hero-note glow-frame"><span class="glow-ring glow-cw" aria-hidden="true"></span><span class="glow-ring glow-ccw" aria-hidden="true"></span><div class="contract-label">// SAME PURCHASE. ITS OWN CLOCK.</div><p>A new buy starts at your maximum sell tax, whether the token launched today or a year ago.</p></div></div><aside class="hero-right">'''+heroart+'''</aside></div></section>
+<section class="hero" id="builder"><div class="hero-grid"><div class="hero-left"><div class="hero-num">(00) - DESIGN_THE_INCENTIVE</div><h1 class="hero-title">YOUR TOKEN.<br/>YOUR <span class="hl hl-lime">RULES.</span></h1><p class="hero-sub">Set the cost of an early exit. Choose how patience gets rewarded. One configurable protocol, with a different model for every token.</p><div class="hero-actions"><a class="btn btn-pri" href="#taxes">DESIGN YOUR MODEL →</a><a class="btn" href="#deploy">CONTRACT &amp; LAUNCH</a></div><div class="contract p-hero-note glow-frame"><span class="glow-ring glow-cw" aria-hidden="true"></span><span class="glow-ring glow-ccw" aria-hidden="true"></span><div class="contract-label">// SAME PURCHASE. ITS OWN CLOCK.</div><p>A new buy starts at your maximum sell tax, whether the token launched today or a year ago.</p></div></div><aside class="hero-right">"""
+    + heroart
+    + """</aside></div></section>
 <div class="p-model-strip container" aria-label="Current model"><div><span>BUY TAX</span><strong id="strip-buy">5%</strong></div><div><span>SELL CURVE</span><strong id="strip-sell">10 → 1%</strong></div><div><span>HOLDER SHARE</span><strong id="strip-holders">70%</strong></div><div><span>PAYOUT ASSET</span><strong>BNB</strong></div></div>
 <div class="sec-div">// SET_THE_RULES · SEE_THE_RESULT</div>
 <section class="section" id="taxes"><div class="container"><div class="section-head"><div class="section-num">(01) - TRANSACTION_MECHANICS</div><h2 class="section-title">PRICE THE <span class="hl hl-lime">EXIT.</span></h2><p class="section-sub">// every acquisition starts fresh. older holdings keep their age.</p></div>
 <div class="p-two"><div class="mech-card p-controls"><div class="p-panel-label">01.1 / TAX PARAMETERS</div>
-'''+slider('buy','Buy tax',0,10,5,.25,'%', 'Project tax on each purchase. Platform fees and gas are separate.')+slider('sellStart','Starting sell tax',0,10,10,.25,'%', 'The maximum applies to new tokens received.')+slider('sellFloor','Mature sell tax',0,10,1,.25,'%', 'The floor after the full holding period.')+slider('decayDays','Days to the floor',1,30,30,1,'d','Daily checkpoints. Qualification can take less than one extra day.')+'''
+"""
+    + slider(
+        "buy",
+        "Buy tax",
+        0,
+        10,
+        5,
+        0.25,
+        "%",
+        "Project tax on each purchase. Platform fees and gas are separate.",
+    )
+    + slider(
+        "sellStart",
+        "Starting sell tax",
+        0,
+        10,
+        10,
+        0.25,
+        "%",
+        "The maximum applies to new tokens received.",
+    )
+    + slider(
+        "sellFloor",
+        "Mature sell tax",
+        0,
+        10,
+        1,
+        0.25,
+        "%",
+        "The floor after the full holding period.",
+    )
+    + slider(
+        "decayDays",
+        "Days to the floor",
+        1,
+        30,
+        30,
+        1,
+        "d",
+        "Daily checkpoints. Qualification can take less than one extra day.",
+    )
+    + """
 <div class="p-choice-label">DECLINE SHAPE</div><div class="p-options" role="group" aria-label="Sell tax curve"><button type="button" data-curve="pi" aria-pressed="true">PI ORIGINAL</button><button type="button" data-curve="linear" aria-pressed="false">LINEAR</button><button type="button" data-curve="early" aria-pressed="false">FAST DROP</button><button type="button" data-curve="late" aria-pressed="false">SLOW DROP</button></div></div>
 <div class="p-side"><div class="p-screen"><div class="p-screen-head"><span>// SELL_TAX_OSCILLOSCOPE</span><span class="led led-sm"></span></div><div class="p-curve-title"><strong id="curve-from">10%</strong><span>→</span><strong id="curve-to">1%</strong></div><svg id="sell-chart" class="p-chart" viewBox="0 0 500 280" role="img" aria-label="Sell tax at each completed holding day"></svg><div class="p-screen-footer"><span>AGE OF THIS PURCHASE</span><span id="curve-duration">30 DAYS</span></div></div><div class="p-copy-note"><strong>New money never inherits an old discount.</strong><p>Exits use the newest tokens first. Transfers charge the sender's exit fee and start a fresh clock for the recipient. A top-up keeps the age of your older balance.</p></div><details class="p-details"><summary>SEE EVERY DAILY CHECKPOINT</summary><div class="p-table-wrap"><table><thead><tr><th>Completed day</th><th>Sell tax</th><th>Reward weight</th></tr></thead><tbody id="daily-table"></tbody></table></div></details></div></div></div></section>
 <div class="sec-div">// NEXT_UP · FUNDED_PAYOUTS</div>
 <section class="section" id="payouts"><div class="container"><div class="section-head"><div class="section-num">(02) - HOLDING_INCENTIVES</div><h2 class="section-title">GIVE TIME <span class="hl hl-lime">WEIGHT.</span></h2><p class="section-sub">// BNB rewards. funded by actual tax receipts. claimed when holders choose.</p></div><div class="p-two"><div class="p-side"><div class="p-screen p-reward-screen"><div class="p-screen-head"><span>// LOYALTY_MULTIPLIER</span><span>BNB</span></div><div class="p-weight-number"><span>×</span><strong id="weight-max">2</strong><small>MAXIMUM WEIGHT</small></div><svg id="weight-chart" class="p-chart" viewBox="0 0 500 220" role="img" aria-label="Reward weight by completed holding day"></svg><div class="p-screen-footer"><span id="reward-first">QUALIFIES AT DAY 1</span><span id="reward-last">MAX AT DAY 30</span></div></div><div class="p-copy-note"><strong>A bigger share of a finite pot.</strong><p>Your reward = funded BNB × your weighted balance ÷ everyone's weighted balance. Holding time changes the share, never creates extra BNB.</p><p id="p-round-description">Funded rounds can settle every 15 minutes. A keeper or any user must call settlement; elapsed time alone does not send a transaction.</p></div></div><div class="mech-card p-controls"><div class="p-panel-label">02.1 / PAYOUT PARAMETERS</div>
-'''+slider('roundMinutes','Minimum round interval',1,1440,15,1,'m','Rewards accrue on settlement. BNB is claimed, not pushed to every wallet.')+slider('qualificationDays','First eligible holding day',1,30,1,1,'d','New purchases have zero reward weight until qualification.')+slider('maxWeight','Maximum holding weight',1,5,2,.25,'×','A relative share multiplier, not a return multiplier.')+slider('loyaltyDays','Day of maximum weight',1,30,30,1,'d','After this checkpoint, the weight stays at its maximum.')+'''
+"""
+    + slider(
+        "roundMinutes",
+        "Minimum round interval",
+        1,
+        1440,
+        15,
+        1,
+        "m",
+        "Rewards accrue on settlement. BNB is claimed, not pushed to every wallet.",
+    )
+    + slider(
+        "qualificationDays",
+        "First eligible holding day",
+        1,
+        30,
+        1,
+        1,
+        "d",
+        "New purchases have zero reward weight until qualification.",
+    )
+    + slider(
+        "maxWeight",
+        "Maximum holding weight",
+        1,
+        5,
+        2,
+        0.25,
+        "×",
+        "A relative share multiplier, not a return multiplier.",
+    )
+    + slider(
+        "loyaltyDays",
+        "Day of maximum weight",
+        1,
+        30,
+        30,
+        1,
+        "d",
+        "After this checkpoint, the weight stays at its maximum.",
+    )
+    + """
 <div class="p-choice-label">WEIGHT GROWTH</div><div class="p-options" role="group" aria-label="Reward weight curve"><button type="button" data-reward-curve="pi" aria-pressed="true">PI STEPS</button><button type="button" data-reward-curve="linear" aria-pressed="false">DAILY RAMP</button></div>
-'''+field('minFunding','MINIMUM FUNDED ROUND / BNB','0','number','min="0" max="1000000" step="0.001"')+'''<p class="p-hint">Below this amount, funds wait for a later round. Zero still requires a positive balance. Claims can receive BNB or WBNB.</p></div></div></div></section>
+"""
+    + field(
+        "minFunding",
+        "MINIMUM FUNDED ROUND / BNB",
+        "0",
+        "number",
+        'min="0" max="1000000" step="0.001"',
+    )
+    + """<p class="p-hint">Below this amount, funds wait for a later round. Zero still requires a positive balance. Claims can receive BNB or WBNB.</p></div></div></div></section>
 <div class="sec-div">// NEXT_UP · FOLLOW_THE_FEES</div>
 <section class="section" id="treasury"><div class="container"><div class="section-head"><div class="section-num">(03) - TREASURY_ROUTING</div><h2 class="section-title">EVERY FEE.<br/><span class="hl hl-lime">ACCOUNTED FOR.</span></h2><p class="section-sub">// choose where 100% of realized project fees go.</p></div><div class="p-allocation" id="allocation-bar" role="img" aria-label="Treasury allocation"><span></span><span></span><span></span><span></span></div><div class="p-split-total"><span>PROJECT TAX → TREASURY</span><strong id="split-total">100% / 100%</strong></div><div class="grid-4 p-split-grid">
-'''+''.join('<article class="mech-card p-controls"><div class="p-panel-label">'+num+' / '+desc+'</div>'+slider(k,title,0,100,val,1,'%',hint)+'</article>' for num,desc,k,title,val,hint in [('03.1','HOLDERS','holders','BNB distribution',70,'Accrued for eligible holders by balance and holding weight.'),('03.2','SUPPLY','burn','Buyback & burn',15,'After graduation, use BNB to buy tokens and burn them.'),('03.3','LIQUIDITY','liquidity','Locked liquidity',10,'After graduation, add pool liquidity. LP tokens go to the burn address.'),('03.4','OPERATIONS','operations','Operations',5,'Paid only to the operations address chosen at launch.')])+'''</div><p id="split-feedback" class="p-feedback" role="status">All fees allocated. Each budget is accounted for separately.</p></div></section>
+"""
+    + "".join(
+        '<article class="mech-card p-controls"><div class="p-panel-label">'
+        + num
+        + " / "
+        + desc
+        + "</div>"
+        + slider(k, title, 0, 100, val, 1, "%", hint)
+        + "</article>"
+        for num, desc, k, title, val, hint in [
+            (
+                "03.1",
+                "HOLDERS",
+                "holders",
+                "BNB distribution",
+                70,
+                "Accrued for eligible holders by balance and holding weight.",
+            ),
+            (
+                "03.2",
+                "SUPPLY",
+                "burn",
+                "Buyback & burn",
+                15,
+                "After graduation, use BNB to buy tokens and burn them.",
+            ),
+            (
+                "03.3",
+                "LIQUIDITY",
+                "liquidity",
+                "Locked liquidity",
+                10,
+                "After graduation, add pool liquidity. LP tokens go to the burn address.",
+            ),
+            (
+                "03.4",
+                "OPERATIONS",
+                "operations",
+                "Operations",
+                5,
+                "Paid only to the operations address chosen at launch.",
+            ),
+        ]
+    )
+    + """</div><p id="split-feedback" class="p-feedback" role="status">All fees allocated. Each budget is accounted for separately.</p></div></section>
 <div class="sec-div">// NEXT_UP · TEST_THE_ASSUMPTIONS</div>
 <section class="section" id="results"><div class="container"><div class="section-head"><div class="section-num">(04) - MODEL_THE_OUTCOME</div><h2 class="section-title">CHANGE THE INPUT.<br/><span class="hl hl-lime">WATCH THE MATH.</span></h2><p class="section-sub">// hypothetical trading activity. no guaranteed income or price effect.</p></div><div class="p-two"><div class="mech-card p-controls"><div class="p-panel-label">04.1 / SCENARIO INPUTS</div><div class="p-field-grid">
-'''+field('volume','DAILY VOLUME / BNB','100','number','min="0" max="1000000000" step="10"')+field('holding','YOUR TOKEN BALANCE','1000000','number','min="0" max="1000000000000000000"')+field('otherWeight','OTHER HOLDERS / WEIGHTED TOKENS','500000000','number','min="0" max="100000000000000000000"')+field('conversionCost','CONVERSION COST / %','0.5','number','min="0" max="100" step="0.1"')+'''</div>
-'''+slider('buyShare','Buy share of trading volume',0,100,50,1,'%', 'The remainder is sell volume.')+slider('sellAge','Assumed age of sold tokens',0,30,7,1,'d','All modeled sells use this age. Actual sellers have mixed acquisition ages.')+slider('holdingDays','Your completed holding days',0,30,7,1,'d','Changes your modeled reward weight, not other holders.')+'''</div><div class="p-screen p-results-screen"><div class="p-screen-head"><span>// DAILY_BNB_LEDGER</span><span>SIMULATION</span></div><div class="p-result-hero"><span>YOUR MODELED REWARD / DAY</span><strong id="r-payout">0.000000</strong><span>BNB</span></div><dl class="p-ledger" id="result-ledger"></dl><div class="p-screen-footer"><span id="round-state">FUNDED ROUND MODEL</span></div><p class="p-result-note">This assumes constant daily volume, the selected sell age and unchanged holder weights. Platform fees, gas and market price changes are separate. If volume stops, new fee income stops.</p></div></div></div></section>
+"""
+    + field("volume", "DAILY VOLUME / BNB", "100", "number", 'min="0" max="1000000000" step="10"')
+    + field(
+        "holding", "YOUR TOKEN BALANCE", "1000000", "number", 'min="0" max="1000000000000000000"'
+    )
+    + field(
+        "otherWeight",
+        "OTHER HOLDERS / WEIGHTED TOKENS",
+        "500000000",
+        "number",
+        'min="0" max="100000000000000000000"',
+    )
+    + field(
+        "conversionCost", "CONVERSION COST / %", "0.5", "number", 'min="0" max="100" step="0.1"'
+    )
+    + """</div>
+"""
+    + slider(
+        "buyShare",
+        "Buy share of trading volume",
+        0,
+        100,
+        50,
+        1,
+        "%",
+        "The remainder is sell volume.",
+    )
+    + slider(
+        "sellAge",
+        "Assumed age of sold tokens",
+        0,
+        30,
+        7,
+        1,
+        "d",
+        "All modeled sells use this age. Actual sellers have mixed acquisition ages.",
+    )
+    + slider(
+        "holdingDays",
+        "Your completed holding days",
+        0,
+        30,
+        7,
+        1,
+        "d",
+        "Changes your modeled reward weight, not other holders.",
+    )
+    + """</div><div class="p-screen p-results-screen"><div class="p-screen-head"><span>// DAILY_BNB_LEDGER</span><span>SIMULATION</span></div><div class="p-result-hero"><span>YOUR MODELED REWARD / DAY</span><strong id="r-payout">0.000000</strong><span>BNB</span></div><dl class="p-ledger" id="result-ledger"></dl><div class="p-screen-footer"><span id="round-state">FUNDED ROUND MODEL</span></div><p class="p-result-note">This assumes constant daily volume, the selected sell age and unchanged holder weights. Platform fees, gas and market price changes are separate. If volume stops, new fee income stops.</p></div></div></div></section>
 <div class="sec-div">// NEXT_UP · FROM_MODEL_TO_CONTRACT</div>
 <section class="section" id="deploy"><div class="container"><div class="section-head"><div class="section-num">(05) - BUILD_AND_LAUNCH</div><h2 class="section-title">MAKE IT<br/><span class="hl hl-lime">YOUR TOKEN.</span></h2><p class="section-sub">// export your exact rules with the configurable Solidity implementation.</p></div><div class="p-two"><div class="mech-card p-controls"><div class="p-panel-label">05.1 / TOKEN IDENTITY</div><div class="p-field-grid">
-'''+field('name','TOKEN NAME','Passive Income','text','maxlength="64" autocomplete="off"')+field('symbol','TICKER','PI','text','maxlength="12" autocomplete="off"')+field('supply','TOTAL SUPPLY','1000000000','text','inputmode="numeric" autocomplete="off"')+field('raiseBNB','BONDING RAISE TARGET / BNB','400','number','min="0.000000000000001" step="1"')+'''</div><p class="p-hint">This preset reserves 80% of supply for the bonding curve and 20% for migration. The curve and target are derived together. Name and ticker are independent of the protocol.</p><div class="p-panel-label p-divider">05.2 / YOUR CONTRACT CONFIGURATION</div><div id="config-summary" class="p-config-summary"></div><div class="p-actions"><button class="btn btn-pri" id="download-pack" type="button">DOWNLOAD CONTRACT PACK ↓</button><button class="btn" id="download-config" type="button">EXPORT CONFIG JSON</button></div><div class="p-actions p-small-actions"><label class="p-import" for="import-config">IMPORT CONFIG <input id="import-config" type="file" accept=".json,application/json"/></label><button type="button" id="share-config">COPY MODEL LINK</button></div><p id="export-feedback" class="p-feedback" role="status" aria-live="polite">Your settings are saved locally. The download includes this configuration.</p><div id="validation-errors" class="p-errors" role="alert" hidden></div></div><div class="p-side"><div class="p-launch-path"><div class="p-panel-label">05.3 / OPENFOUR DEPLOYMENT</div><ol><li><span>01</span><div><strong>Configure a token</strong><p>Choose its rules above. Export Solidity source, tests and your exact launch configuration.</p><b class="p-state">AVAILABLE NOW</b></div></li><li><span>02</span><div><strong>Register the protocol</strong><p>OpenFour reviews the reusable preset and registers its implementations. Creators then reuse that preset.</p><b class="p-state p-state-pending">REGISTRATION PENDING</b></div></li><li><span>03</span><div><strong>Launch through OpenFour</strong><p>Load the approved preset, obtain the platform's creation signature, simulate, then confirm the creation transaction in your wallet.</p></div></li></ol><button class="btn p-launch-btn" disabled aria-describedby="deployment-gate">LAUNCH ON OPENFOUR</button><p id="deployment-gate" class="p-hint">The HoldPI preset has no approved production ID yet. Token deployment becomes available after registration and the official signing flow are connected.</p><a class="p-text-link" href="https://github.com/four-meme-community/openfour-docs/tree/main/developer" target="_blank" rel="noopener">OPENFOUR DEVELOPER DOCS ↗</a><br/><a class="p-text-link" href="/review/protocol/README.md">PROTOCOL SPEC &amp; INTEGRATION →</a></div><details class="p-details"><summary>WHAT IS IN THE CONTRACT PACK?</summary><div class="p-detail-body"><p>Configurable token, purchase-age ledger, BNB rewards, treasury, OpenFour modules and validator. Includes compiler input, ABIs, tests, configuration encoding and a creation preflight script.</p><p>Settings have no admin setters after initialization. OpenFour's registry and token upgrade authority remain a separate trust boundary.</p><p>Review source, with local test evidence. Production Core integration and independent security review remain required.</p></div></details><details class="p-details"><summary>INSPECT THE EXACT CONFIGURATION</summary><pre id="config-preview"></pre></details><details class="p-details"><summary>HOW THE MODEL BECOMES SOLIDITY</summary><div class="p-detail-body"><p>All sliders compile to integer basis points. The sell and reward curves become 31 daily values. The same arrays drive this preview and initialize the contracts.</p><p>Age = max(0, floor(now / 86400) - ceil(receipt / 86400)). Rounding is conservative: a checkpoint arrives after the stated time, with less than one extra day. Settlement loops over cohorts, never every holder.</p><p>BNB is accounted for as WBNB and unwrapped on claim. Minimum funding and elapsed time must both be satisfied; anyone can trigger an eligible settlement.</p><a href="/docs#architecture">READ THE BASE MECHANICS →</a></div></details></div></div></div></section>
-</main><footer class="p-footer container"><a class="brand" href="/"><span class="mark">π</span><span class="brand-name">PASSIVE_INCOME</span></a><div><a href="/">PI EXAMPLE</a><a href="/docs">TECHNICAL DOCS</a><a href="/brandbook">BRAND BOOK</a><a href="https://x.com/hold_pi" target="_blank" rel="noopener noreferrer" aria-label="HoldPI on X (opens in a new tab)" class="social-footer">X / @hold_pi ↗</a></div><span>// HOLDPI_PROTOCOL · BNB · REVIEW SOURCE</span></footer><button id="scroll-top" class="scroll-top" aria-label="back to top">↑</button></body></html>'''
-(root/'website/protocol.html').write_text(html)
+"""
+    + field("name", "TOKEN NAME", "Passive Income", "text", 'maxlength="64" autocomplete="off"')
+    + field("symbol", "TICKER", "PI", "text", 'maxlength="12" autocomplete="off"')
+    + field(
+        "supply", "TOTAL SUPPLY", "1000000000", "text", 'inputmode="numeric" autocomplete="off"'
+    )
+    + field(
+        "raiseBNB",
+        "BONDING RAISE TARGET / BNB",
+        "400",
+        "number",
+        'min="0.000000000000001" step="1"',
+    )
+    + """</div><p class="p-hint">This preset reserves 80% of supply for the bonding curve and 20% for migration. The curve and target are derived together. Name and ticker are independent of the protocol.</p><div class="p-panel-label p-divider">05.2 / YOUR CONTRACT CONFIGURATION</div><div id="config-summary" class="p-config-summary"></div><div class="p-actions"><button class="btn btn-pri" id="download-pack" type="button">DOWNLOAD CONTRACT PACK ↓</button><button class="btn" id="download-config" type="button">EXPORT CONFIG JSON</button></div><div class="p-actions p-small-actions"><label class="p-import" for="import-config">IMPORT CONFIG <input id="import-config" type="file" accept=".json,application/json"/></label><button type="button" id="share-config">COPY MODEL LINK</button></div><p id="export-feedback" class="p-feedback" role="status" aria-live="polite">Your settings are saved locally. The download includes this configuration.</p><div id="validation-errors" class="p-errors" role="alert" hidden></div></div><div class="p-side"><div class="p-launch-path"><div class="p-panel-label">05.3 / OPENFOUR DEPLOYMENT</div><ol><li><span>01</span><div><strong>Configure a token</strong><p>Choose its rules above. Export Solidity source, tests and your exact launch configuration.</p><b class="p-state">AVAILABLE NOW</b></div></li><li><span>02</span><div><strong>Register the protocol</strong><p>OpenFour reviews the reusable preset and registers its implementations. Creators then reuse that preset.</p><b class="p-state p-state-pending">REGISTRATION PENDING</b></div></li><li><span>03</span><div><strong>Launch through OpenFour</strong><p>Load the approved preset, obtain the platform's creation signature, simulate, then confirm the creation transaction in your wallet.</p></div></li></ol><button class="btn p-launch-btn" disabled aria-describedby="deployment-gate">LAUNCH ON OPENFOUR</button><p id="deployment-gate" class="p-hint">The HoldPI preset has no approved production ID yet. Token deployment becomes available after registration and the official signing flow are connected.</p><a class="p-text-link" href="https://github.com/four-meme-community/openfour-docs/tree/main/developer" target="_blank" rel="noopener">OPENFOUR DEVELOPER DOCS ↗</a><br/><a class="p-text-link" href="/review/protocol/README.md">PROTOCOL SPEC &amp; INTEGRATION →</a></div><details class="p-details"><summary>WHAT IS IN THE CONTRACT PACK?</summary><div class="p-detail-body"><p>Configurable token, purchase-age ledger, BNB rewards, treasury, OpenFour modules and validator. Includes compiler input, ABIs, tests, configuration encoding and a creation preflight script.</p><p>Settings have no admin setters after initialization. OpenFour's registry and token upgrade authority remain a separate trust boundary.</p><p>Review source, with local test evidence. Production Core integration and independent security review remain required.</p></div></details><details class="p-details"><summary>INSPECT THE EXACT CONFIGURATION</summary><pre id="config-preview"></pre></details><details class="p-details"><summary>HOW THE MODEL BECOMES SOLIDITY</summary><div class="p-detail-body"><p>All sliders compile to integer basis points. The sell and reward curves become 31 daily values. The same arrays drive this preview and initialize the contracts.</p><p>Age = max(0, floor(now / 86400) - ceil(receipt / 86400)). Rounding is conservative: a checkpoint arrives after the stated time, with less than one extra day. Settlement loops over cohorts, never every holder.</p><p>BNB is accounted for as WBNB and unwrapped on claim. Minimum funding and elapsed time must both be satisfied; anyone can trigger an eligible settlement.</p><a href="/docs#architecture">READ THE BASE MECHANICS →</a></div></details></div></div></div></section>
+</main><footer class="p-footer container"><a class="brand" href="/"><span class="mark">π</span><span class="brand-name">PASSIVE_INCOME</span></a><div><a href="/">PI EXAMPLE</a><a href="/docs">TECHNICAL DOCS</a><a href="/brandbook">BRAND BOOK</a><a href="https://x.com/hold_pi" target="_blank" rel="noopener noreferrer" aria-label="HoldPI on X (opens in a new tab)" class="social-footer">X / @hold_pi ↗</a></div><span>// HOLDPI_PROTOCOL · BNB · REVIEW SOURCE</span></footer><button id="scroll-top" class="scroll-top" aria-label="back to top">↑</button></body></html>"""
+)
+(root / "website/protocol.html").write_text(html)

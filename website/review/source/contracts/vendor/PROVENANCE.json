@@ -1,0 +1,59 @@
+{
+  "repository": "https://github.com/four-meme-community/openfour-docs",
+  "commit": "8ca5554df22ad511126d8547c212fa161ecf19ee",
+  "files": [
+    {
+      "path": "interfaces/IOpenFourCurveModule.sol",
+      "sha256": "11b5b5256c19c69d03911103726fe8b827ca3d8df344761af740e6eb3cb9c9a5"
+    },
+    {
+      "path": "interfaces/IOpenFourMigrateModule.sol",
+      "sha256": "d9bacb1230ca95847e6961f0679555540d05881a5cabb92e1aa941f792fbff90"
+    },
+    {
+      "path": "interfaces/IOpenFourModuleSchema.sol",
+      "sha256": "73fc6d648407852fd262fb19c6dac2e5db8f144440c7ee01eb5c26a241a654a1"
+    },
+    {
+      "path": "interfaces/IOpenFourPresetValidator.sol",
+      "sha256": "ed698a103c10b3f0ea30cbce2a94a9e80db1cfcf716f68ac107d64ed6fafe1f1"
+    },
+    {
+      "path": "interfaces/IOpenFourToken.sol",
+      "sha256": "b0493f078075dae1044a656e62b9445d5e3d9a4e69cf581194aa22c8caa12bc6"
+    },
+    {
+      "path": "interfaces/IOpenFourTokenModule.sol",
+      "sha256": "15762d9ca5c951e774bd5410ab7c60ebb1654cdc7ce715cac7fd94e001d5af97"
+    },
+    {
+      "path": "interfaces/IOpenFourTradeModule.sol",
+      "sha256": "ed1903d6d05e61901597627390d80b8364cd00549f0f4a2e171fefb436e74f46"
+    },
+    {
+      "path": "interfaces/IOpenFourVault.sol",
+      "sha256": "716f789b0ed070721983f9d902062aba48f221ecfec7e051e7364b3d08176770"
+    },
+    {
+      "path": "interfaces/ITagDescriptor.sol",
+      "sha256": "9b5a2700e573d0d1f2d1f19daa83671eb56d28b4f32b217460399d839410bc3c"
+    },
+    {
+      "path": "interfaces/ITaxTokenBonding.sol",
+      "sha256": "73561dd80b083b618a4281143264e3cffcdc93a60b3a002fc26ad00ab86efa6d"
+    },
+    {
+      "path": "libraries/OpenFourTypes.sol",
+      "sha256": "7538b3a831893a06e5eee87af3dc4cf7d701d3c4bf3884356378cba368602dca"
+    },
+    {
+      "path": "modules/vault/TaxBondingVault.sol",
+      "sha256": "222cb6e5ee4882fc52b27be1259df576dc13c155a7956fd021fc2ebda3043508"
+    },
+    {
+      "path": "token/OpenFourToken.sol",
+      "sha256": "66f6f0f576294926ec48e1a49da9b9a9145a42b8c9aba20ae6951c5d2eb29f5d"
+    }
+  ],
+  "license": "MIT, preserved in each source"
+}

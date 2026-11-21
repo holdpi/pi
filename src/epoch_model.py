@@ -216,7 +216,10 @@ class Model:
     def audit(self):
         for name in list(self.accounts):
             self.settle(name)
-        assert self.pool_tokens + self.fee_tokens + sum(a.balance for a in self.accounts.values()) == SUPPLY
+        assert (
+            self.pool_tokens + self.fee_tokens + sum(a.balance for a in self.accounts.values())
+            == SUPPLY
+        )
         assert self.global_mature == sum(a.mature for a in self.accounts.values())
         manual_lots = {}
         for a in self.accounts.values():
@@ -233,7 +236,9 @@ class Model:
         return {
             "holders": len(self.accounts),
             "active_global_cohorts": len(self.global_lots),
-            "max_wallet_active_cohorts": max((len(a.lots) for a in self.accounts.values()), default=0),
+            "max_wallet_active_cohorts": max(
+                (len(a.lots) for a in self.accounts.values()), default=0
+            ),
             "reward_funded_wei": self.reward_funded,
             "reward_paid_wei": self.reward_paid,
             "pending_reward_wei": self.pending_reward,

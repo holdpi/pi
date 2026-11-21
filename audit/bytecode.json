@@ -1,67 +1,166 @@
 {
   "compiler": "0.8.24+commit.e11b9ed9.Emscripten.clang",
-  "solidityFilesCompiled": 45,
-  "legacyCreationMatches": 10,
-  "protocolArtifactsMatch": 40,
-  "protocolComponentHashes": [
+  "solidityFilesCompiled": 50,
+  "abiBaselineCommit": "c7477c41de536224afebfa63d3a8996a7ea9ccb2",
+  "components": [
+    {
+      "name": "PiCurveModule",
+      "source": "contracts/src/PiCurveModule.sol",
+      "sourceSha256": "f43b20b4fc160e80979165736cc9d859ac5343fab8192b7e05352959a0318476",
+      "creationSha256": "259bd72423b6708cfd699e096c7ef353907e2fb1636961b6922e0d4655a703fb",
+      "runtimeTemplateSha256": "f47f461f19813c9360e406a68ec7a370ab59740272981ba9cb94de0a8d49ad35",
+      "runtimeBytes": 4695
+    },
+    {
+      "name": "PiMigrateModule",
+      "source": "contracts/src/PiMigrateModule.sol",
+      "sourceSha256": "9130d58cc8f91e4d688e622f7af2c516f3483781f4369788ab4f4e2b7d9bf9b1",
+      "creationSha256": "7954fdbb807ff14ac0eb81d1c11c7fc5eb7c6345c87beb7ad5d116ebfea5c88a",
+      "runtimeTemplateSha256": "1bb1d9ccaefb12a2eb81400c1396dca16ffd1d54dda7513f436ce04ce477d89e",
+      "runtimeBytes": 5836
+    },
+    {
+      "name": "PiPresetValidator",
+      "source": "contracts/src/PiPresetValidator.sol",
+      "sourceSha256": "8a0694c14a6f5a60771be505ef77ef13940c142f29a2c829bd92b4479ab43c4a",
+      "creationSha256": "7de29d8fe6a7c3954c4e338ccd401d7602db4d3291432ede6e19a2be4df35d0d",
+      "runtimeTemplateSha256": "b7613d48b35c86b332ed9c041f73f899bd4db1a79ccaa47359f21dba2abe8a04",
+      "runtimeBytes": 2596
+    },
+    {
+      "name": "PiRates",
+      "source": "contracts/src/PiRates.sol",
+      "sourceSha256": "4e26bf482e0ceccc901a52282b5aee1b1693bc7dc545991f81c446f04558d914",
+      "creationSha256": "9795abf464a7fe81fc97701d45689357ebc660e20ca8d04982f61da83ab62899",
+      "runtimeTemplateSha256": "adc8cf1dbe879e4bbfe1a7dd3cdb8563c27b48abbe15b031e5952c66f7a41458",
+      "runtimeBytes": 58
+    },
+    {
+      "name": "PiRewards",
+      "source": "contracts/src/PiRewards.sol",
+      "sourceSha256": "c5dff0609fce5edbcaaedd1a4e87014ad444b156c01624b92053ea619d5d7ab5",
+      "creationSha256": "edf4b02f32ff706a98303eda5e2d7afe553e5f1a2a3e6a708eb3f2a4eeda35f2",
+      "runtimeTemplateSha256": "993f3f8573c765288c8e8f8ae3f2c54ed60fd69702e3dd318db319ffebe5988f",
+      "runtimeBytes": 8860
+    },
+    {
+      "name": "PiToken",
+      "source": "contracts/src/PiToken.sol",
+      "sourceSha256": "8f775ecd2b9746e58a92afda1b14e7c8a2d17afaa31416afb3d11fc097c3dd8f",
+      "creationSha256": "59f73a4269af00f66624e2cfb588688c8409fdebe563ef1435f5b74904fe2b41",
+      "runtimeTemplateSha256": "5a7d40990b012c971463ac29170c65be02e2e516dc7e008d156c582b5f359db9",
+      "runtimeBytes": 12073
+    },
+    {
+      "name": "PiTokenModule",
+      "source": "contracts/src/PiTokenModule.sol",
+      "sourceSha256": "6b8a0ecdbf02df806e492daffc9706fb1f72d4799ff5fe68c5b0e6bc179e1a91",
+      "creationSha256": "19e3929a8139ba6bf098dad017bd5c9d7f816b3b0a683346a8d6148ec6769ef1",
+      "runtimeTemplateSha256": "f84bd99592aa5ed8fde00efef593e5b1e02dd295bbf48f3e24a6dff0c06f1613",
+      "runtimeBytes": 3091
+    },
+    {
+      "name": "PiTradeModule",
+      "source": "contracts/src/PiTradeModule.sol",
+      "sourceSha256": "293cc1ecbc05b1a3ed834a2ac8a20b51c626142bbc19cfa1bd7244a16ff7b1ca",
+      "creationSha256": "1bc75eb9b3fd8db06dc7405355996e77e18f37ab75cbe77990fc7a516e1627b7",
+      "runtimeTemplateSha256": "2a6e05969a2c047a7b136e98b81bd2bf4dfdc2f1c8f7d7a674371aba56f8ba47",
+      "runtimeBytes": 3173
+    },
+    {
+      "name": "PiTreasury",
+      "source": "contracts/src/PiTreasury.sol",
+      "sourceSha256": "40728520e47467db2b41f330467ab491a4a2d7cfc9940e6e8e0e449eefcb97ff",
+      "creationSha256": "23dca458ab694cfb50d0de3d9ad452f39b4b9fce4235c4e30fb95e52ed1ae495",
+      "runtimeTemplateSha256": "14168fc6c2ee9fc189b099de48c3653ddf0d189d5ec42b182749f8818546f082",
+      "runtimeBytes": 13715
+    },
+    {
+      "name": "PiVault",
+      "source": "contracts/src/PiVault.sol",
+      "sourceSha256": "290328f5dd94500c83406db44088d76ae68615064c6e70005f6ca679df9d0fff",
+      "creationSha256": "55248fa609dd08b5cb22aae6b48e7b4c18972fe2ebcfcfa4035a1fdd3d5598de",
+      "runtimeTemplateSha256": "3b44d0ad5e5f498d4f35054117fc1244a24d450b8c26e25c062a38ee5a73e865",
+      "runtimeBytes": 6402
+    },
     {
       "name": "HoldConfig",
-      "creationSha256": "13ac60ccd2f7e00aa4b20fd4b79b05de2f50a4faf42ad9360c0ed45fbdd2215f",
-      "runtimeTemplateSha256": "d1ffc7ea3952908eabb16ad3097e80bf96ca74c2afc0badc1b9e7f85d7b4f462",
+      "source": "contracts/src/protocol/HoldConfig.sol",
+      "sourceSha256": "4943d09adcd41061ff5da2754c4ddbc10caa97f0ad502fc3f74e6b492742f59d",
+      "creationSha256": "5c2141105cc9b68fd1bd716ff1580541b0adc050992aae862cb8e56befe00b4a",
+      "runtimeTemplateSha256": "767d8cc099dff035de3230e0c127b3d46903612ba9869fe2f9a013d1bd854ddb",
       "runtimeBytes": 58
     },
     {
       "name": "HoldCurveModule",
-      "creationSha256": "671f90015ed0959f2bf45fdb1bec5aa2f852b81dbe6c72c7f150bffe83e41cf1",
-      "runtimeTemplateSha256": "fceca84502e3fe98999d7034e91b9b230430af78d07f917a9f6c24705aea1371",
-      "runtimeBytes": 5997
+      "source": "contracts/src/protocol/HoldCurveModule.sol",
+      "sourceSha256": "bec0f3bd050d49c95b8d8f319abc5a409f1b916b92a5fdf0df0239c08573eb31",
+      "creationSha256": "76454a5b533f67a49829bd6a13ae40bec88b3dfcdfeec1fc45626368024bd910",
+      "runtimeTemplateSha256": "a3de879bb70b88d6e51604e75cc3dba92cf9e97c0872decb576181823e4a0aa6",
+      "runtimeBytes": 6018
     },
     {
       "name": "HoldMigrateModule",
-      "creationSha256": "972eabf4c3b33ad949ae0d9d45c2743c619520234af0f5b6e38f3af21830c482",
-      "runtimeTemplateSha256": "ac2f6bce61263c6d98d00ab7a6a79990d6c60c46b7cc1893e342d20ca64678fb",
-      "runtimeBytes": 6383
+      "source": "contracts/src/protocol/HoldMigrateModule.sol",
+      "sourceSha256": "86d3dcb147c9487660a66581473397a562b87164caebf567f0fe56fbf1a92544",
+      "creationSha256": "df0f2f66f77930062c66b4d8154fd48677a3b579a381cda62727f964b64827b5",
+      "runtimeTemplateSha256": "00ac887eeeab4b3dbc1c4f52cb2882030617431b21f3eced3b34f966c751f933",
+      "runtimeBytes": 6404
     },
     {
       "name": "HoldPresetValidator",
-      "creationSha256": "d9d041a6c80e45bb5505fdf1ef82db2b350537137467b45707d2be8c4bf63f47",
-      "runtimeTemplateSha256": "9794cffcb41ef4ce1cd3677a760e25e689ecd8d64e90b37bdecd0ed19f127afc",
+      "source": "contracts/src/protocol/HoldPresetValidator.sol",
+      "sourceSha256": "41649a7f9ef83c03fc0477f4816cd2f750a5b100789511d1a23dba0c224b406b",
+      "creationSha256": "e47885810b25a158cc55f6a3135eb18dcbd1f0db8c8d4d141fdb0288c0c7a42d",
+      "runtimeTemplateSha256": "95446f82eaed4dd29ae4cefc14e637fe91a7203f281d5fdded5dcc81180702cb",
       "runtimeBytes": 4248
     },
     {
       "name": "HoldRewards",
-      "creationSha256": "8b10ae58a54ef7f76051e20c23179d213544bc74c9838273028ad58f29992d74",
-      "runtimeTemplateSha256": "4f83efb61bf583acc1ec000d86b18b2d962e615b67f75c3758bddaa7ad69b2a4",
-      "runtimeBytes": 9097
+      "source": "contracts/src/protocol/HoldRewards.sol",
+      "sourceSha256": "1b2640fbd5b35c1eda0c769721cc663a39c8ff7b01189db490ab45bd02dcfac1",
+      "creationSha256": "552ae32ac8c0ef7b6165c1f98c78fa9349cd16802eb1e5987e649585ad8da51d",
+      "runtimeTemplateSha256": "fb3ce4ce47f85e6e6c7b97eaf5f439a48ae7ca5e7d522f6882f4f20ebb3c68fa",
+      "runtimeBytes": 9617
     },
     {
       "name": "HoldToken",
-      "creationSha256": "0f41e00d1d1d6e1eb2e1971c302033b2eb4f8ae5d8371d8e67369baa7c2a7942",
-      "runtimeTemplateSha256": "75a251010868808483916b4a7dd4995e771a9259b8ddf21ff4a47ad4f8b91874",
-      "runtimeBytes": 13814
+      "source": "contracts/src/protocol/HoldToken.sol",
+      "sourceSha256": "4ca612b04e38f114a3c9ea670e79f91ad86d6e10487a203f2d9ae36e984c83fc",
+      "creationSha256": "0dd76b192d03e6970ef2cd65b4dd91897c4a662da2fab9a2539f8f82139aa8b7",
+      "runtimeTemplateSha256": "b95a0e6b96ec5ad4fd186555bd6c0e023bede183bc3c427d18ea2e1363602c08",
+      "runtimeBytes": 13879
     },
     {
       "name": "HoldTokenModule",
-      "creationSha256": "9cd11d5644c4c8e4cc80b1818c2261b4bc9f01afe8f3fb4eb86a76a8de957bc6",
-      "runtimeTemplateSha256": "a6eb16c28b5cb08e80c77d182ef93b42b40788aa4a1c7a3456c177a7737a4744",
+      "source": "contracts/src/protocol/HoldTokenModule.sol",
+      "sourceSha256": "ea1cdcc81611963436da621590a6d47265dfae775dbfc3bca3184466e4b2981f",
+      "creationSha256": "0d72bec37be47d09094ce705724d360250cf55f164bd1d471f1df006136462c3",
+      "runtimeTemplateSha256": "828d528990632932db2037c52065b52891a7839028f5f1bd2cb41da7bbe20537",
       "runtimeBytes": 6790
     },
     {
       "name": "HoldTradeModule",
-      "creationSha256": "806543e75ffd1e65658b4e10ba49f27cd805956c7fd0a6217b71a6ad8bf6ccfa",
-      "runtimeTemplateSha256": "ec9f45ab2a369e2e28d3716a8308cc31416a391fb496a2719fdbc8b3f338562d",
+      "source": "contracts/src/protocol/HoldTradeModule.sol",
+      "sourceSha256": "5c5e96a6ac65909ee864b46e5037b9c1261d3e4aa9365b93dafd2517f3dc7b3e",
+      "creationSha256": "db1ffbda16674365cb5c08cf172e9be546eeccfa51069e57d7bb0208e796ae14",
+      "runtimeTemplateSha256": "af7f016973ddc83a228bf8b33f6b350ab559e70e154b18d62ecffafbd3021809",
       "runtimeBytes": 3322
     },
     {
       "name": "HoldTreasury",
-      "creationSha256": "a5a18b3be4a927800fbc43c7fc86ef2f948aad150414f0c1cd2fca7d063015e9",
-      "runtimeTemplateSha256": "bf983f27aa6d4b0abe35947956a1d979b13a938b3515525c052fa0b0a08762d6",
-      "runtimeBytes": 12508
+      "source": "contracts/src/protocol/HoldTreasury.sol",
+      "sourceSha256": "531e35d0ef4ca19b9a3b4e2d5ede6075c4beffa0f022d127787240b0d165574a",
+      "creationSha256": "27c42b064b28e322699233b0e0c98e93c435742127012ccbddde3887b7bac93e",
+      "runtimeTemplateSha256": "b8826b7145e64c4d93e07cc4214247cc64daf5e5900eb5d60db935bc46aa3389",
+      "runtimeBytes": 14368
     },
     {
       "name": "HoldVault",
-      "creationSha256": "8387205bdcfe59ccea14c7120c3ec5f19d00ff19ad8d8c4c39eef47aa3a0b940",
-      "runtimeTemplateSha256": "a896f05ec9f897a374d094e9c685e621be4eca31424764bb9dba39888f68568c",
+      "source": "contracts/src/protocol/HoldVault.sol",
+      "sourceSha256": "01104df71f9ad934e96db8b4a7bc104427e9891bab0763b72087fa3549df2ce5",
+      "creationSha256": "2e13af167eed15d2bdb21b12aeb3a11207a1d3c678737285110f4c0067c876f8",
+      "runtimeTemplateSha256": "ecd87cb53c1f7a1dc07624319c2e9adf1394497eeb687a2d2e3a2515a2a6b2b4",
       "runtimeBytes": 6909
     }
   ]

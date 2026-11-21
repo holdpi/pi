@@ -1,53 +1,56 @@
 # Reproducing the review
 
-## Local checks and compilation
+## Toolchain and local checks
 
-Use Node.js 24 and Python 3. The reviewed build used Node.js 24.16.0, npm 11.13.0, Hardhat 2.29.1 and the checked-in npm lock. Solidity uses `0.8.24+commit.e11b9ed9`, optimizer 200 runs, via IR and the Paris EVM target. OpenZeppelin is locked at 4.9.6.
-
-From the repository root:
+Use Node.js 24, npm and Python 3.9 or newer. This revision uses Hardhat 2.29.2, Solidity `0.8.24+commit.e11b9ed9.Emscripten.clang`, optimizer 200 runs, via IR and the Paris EVM target. OpenZeppelin is pinned at 4.9.6. Dependency advisories and the targeted development-tool overrides are recorded separately. [Dependency review](DEPENDENCIES.md)
 
 ```sh
-node --test tests/*.test.cjs
-python3 scripts/verify-review.py
-PYTHONPATH=src PYTHONDONTWRITEBYTECODE=1 python3 -c 'from pi_bnb_v2 import checks; from check_model import run; print(checks()["status"]); run()'
-(cd contracts && npm ci && npm run compile)
+npm run setup
+python3 -m venv .venv
+. .venv/bin/activate
+python3 -m pip install -r requirements-dev.txt
+npm run check
 ```
 
-The JavaScript checks cover fee and reward tables, finite budget conservation, configuration import/validation and the personalized ZIP. The Python economic model exercises 10,000 seeded actions as well as individual policy checks. The earlier Base model is included for comparison. The review verifier checks site dependencies, original design assets, pinned vendor hashes, both ZIPs and the protocol ZIP's individual file receipts.
+The aggregate command checks formatting, dependency advisories, Python lint, both economic models, compilation, public ABI compatibility and review artifact consistency. The browser model suite contains 14 cases. The Python models include policy checks and 10,000 seeded actions. GitHub Actions also runs the complete fork suite in a separate job.
 
-## Fork suites
-
-Set `BNB_ARCHIVE_RPC` in your shell to a BNB Smart Chain RPC that can serve historical state at block 134700514. Keep provider credentials local.
+## Contract execution
 
 ```sh
-(
-  cd contracts
-  PI_FORK_URL="$BNB_ARCHIVE_RPC" PI_FORK_BLOCK=134700514 npm test
-)
+npm run test:contracts
 ```
 
-Use a recent supported block if the provider has pruned this block, and record the block and hash with your results. Hardhat runs both suites locally using ephemeral accounts. The fork uses actual WBNB and PancakeSwap V2. `CoreHarness` supplies the Core-side settlement adapter.
+The runner defaults to a public BNB RPC and selects the head minus 64 blocks. It prints the block number and hash before running. Set `PI_FORK_URL` and `PI_FORK_BLOCK` to reproduce a historical snapshot through an archive-capable provider. Keep credential-bearing RPC URLs in your environment.
 
-| Check run on 20 November 2026 | Result |
-| --- | --- |
-| Fresh npm install with the checked-in lock and compile | Compiled 45 Solidity files |
-| BNB fork block 134700514, chain ID 56 | 24 fixed PI cases and 10 configurable preset cases passed |
-| Frontend economics and configurable builder | 14 cases passed |
-| Independent BNB reference model | Policy checks and 10,000 seeded actions passed |
-| Deployed website provenance | All 87 source files under `website/` matched the blobs in the Pages revision. Ten live HTTPS paths, including both ZIPs, matched the same bytes. |
-| Build artifact parity | The compiled creation hashes and ABIs matched all 10 legacy records. The freshly built bytecode, runtime templates and ABIs matched all 40 archived Solidity artifact records in the protocol ZIP. |
+The committed run at block `134877632` on chain `56` passed all 80 cases. Its block hash is `0x316231b990dec34bc6e05804213cdf129bbf0570e39e165c55e35b56252598f0`.
 
-The fork block hash was `0x07c4e967a9eb3b012e4afc97469b3ac7fa4b69aaba2acaff7643c71e4f9bc1bb`. Prior runs are retained in [the fixed PI receipt](../outputs/contract-verification.json) and [the configurable preset receipt](../website/review/protocol/verification.json). They used historical blocks 133771470 and 133933969, respectively. No results are combined across those blocks for the 34-case rerun.
+| Coverage | Cases |
+| --- | ---: |
+| Public ABI compatibility across the original components | 20 |
+| Shared fixed-policy behavior against PI | 25 |
+| The same shared behavior against configurable HoldPI | 25 |
+| Configurable policy, encoding and validation | 10 |
 
-The site comparison used the [GitHub Pages revision](https://github.com/noirchain/holdpi-site/tree/aa558c61233ec750b1710db02d49a0c2372cc515). It also contains directory-route copies, the custom-domain mapping and `.nojekyll`, which are created by the local staging script.
+The fork uses actual WBNB and PancakeSwap V2 contracts. `CoreHarness` supplies the local settlement adapter. The report includes each test result, selected gas measurements, the compiler, fork identity and hashes of the complete current source, test fixtures, dependency configuration and browser policy models. [Executed receipt](../outputs/contract-verification.json)
 
-## Review downloads and compiler inputs
+The ABI regression baseline comes from initial public commit `c7477c41de536224afebfa63d3a8996a7ea9ccb2`. Tests compare callable signatures, return types, mutability, errors and event indexing. Shared implementations change bytecode and internal storage layout. Use this revision for fresh deployments, with a separate storage-compatibility review for any upgrade.
 
-- [PI review ZIP](../website/review/holdpi-bnb-review.zip) contains the published fixed-PI review, with the [compiler input](../website/review/compiler-input.json), [component manifest](../website/review/manifest.json) and [download digest](../website/review/download.json).
-- [Protocol review ZIP](../website/review/holdpi-protocol-review.zip) contains both sets of Solidity sources, standard compiler input, artifacts, and default configuration. See its [manifest](../website/review/protocol/manifest.json) and [download digest](../website/review/protocol/download.json).
-- [Bytecode receipt](bytecode.json) lists SHA-256 fingerprints of the freshly compiled configurable components. The runtime fingerprints cover compiler templates before immutable values are inserted at deployment.
-- [Vendor provenance](../contracts/vendor/PROVENANCE.json) records the OpenFour revision `8ca5554df22ad511126d8547c212fa161ecf19ee` and source hashes. The public [upstream revision comparison](https://github.com/four-meme-community/openfour-docs/compare/8ca5554df22ad511126d8547c212fa161ecf19ee...079a45e9c3358c9f357c84f336c7d915c9f0e9fc) at preparation time showed a later change to two unused Royalty vault sources.
+## Generated review packages
 
-To regenerate review exports, use a disposable checkout with a clean compile and run `python3 scripts/protocol/build-package.py` and `python3 scripts/build-review.py`. These commands overwrite generated review files in that checkout and retain the dated verification receipts. The checked-in ZIPs remain the reference for published bytes. `scripts/rebuild-site.py` documents the original recovery transformation. Serve `website/` directly for the current site.
+```sh
+npm run compile:clean
+npm run test:contracts
+npm run package:review
+npm run check
+```
 
-The fork evidence establishes behavior with the supplied settlement harness and external DEX contracts. Four.meme's composed Core/Registry/FeeRouter, signed creation, production registration, keeper operation, final launch bindings and independent review are pending. See [Four.meme integration review](OPENFOUR.md) for the platform acceptance checks.
+Packaging requires a complete compiler input matching every editable Solidity source and a passing, source-bound receipt covering all four suites. A changed contract, fixture, policy model or dependency lock requires a new test run. Both ZIP writers normalize ordering, timestamps and permissions. Repeating the export with identical inputs produces identical ZIP bytes.
+
+- The fixed PI review ZIP contains the website, models, Solidity, tests, source viewer and audit documentation. [Full package](../website/review/holdpi-bnb-review.zip)
+- The configurable protocol ZIP contains the Solidity sources, test dependencies, standard compiler input, artifacts and default configuration. The builder appends the selected configuration to this archive. [Protocol package](../website/review/holdpi-protocol-review.zip)
+- The bytecode receipt covers all 20 fixed and configurable components. The verifier compares source hashes and compiled creation and runtime-template fingerprints. Runtime templates precede immutable substitution at deployment. [Bytecode receipt](bytecode.json)
+- OpenFour source remains pinned to revision `8ca5554df22ad511126d8547c212fa161ecf19ee`, with individual file digests and upstream notices. [Vendor provenance](../contracts/vendor/PROVENANCE.json)
+
+The initial website publication and original audit snapshot remain traceable through Git history. Current exports represent this checkout. The deployed site revision is recorded in the deployment document. [Website deployment](../docs/DEPLOYMENT.md)
+
+Four.meme's composed Core, Registry, FeeRouter, signed creation, production registration, keeper operation, final launch bindings and independent review remain integration work. [Platform acceptance checks](OPENFOUR.md)

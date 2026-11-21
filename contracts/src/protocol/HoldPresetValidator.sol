@@ -5,8 +5,7 @@ import {IOpenFourPresetValidator} from "../../vendor/openfour/interfaces/IOpenFo
 import {OpenFourTypes} from "../../vendor/openfour/libraries/OpenFourTypes.sol";
 import {HoldConfig} from "./HoldConfig.sol";
 import {HoldToken} from "./HoldToken.sol";
-import {PiCurveModule} from "../PiCurveModule.sol";
-import {PiMigrateModule} from "../PiMigrateModule.sol";
+import {VirtualReserveCurve} from "../common/VirtualReserveCurve.sol";
 
 /// @notice Deployment-specific bindings must be reviewed with the preset registry.
 contract HoldPresetValidator is IOpenFourPresetValidator {
@@ -46,11 +45,14 @@ contract HoldPresetValidator is IOpenFourPresetValidator {
         require(presetId == 0 || id == presetId, "HOLD: preset");
         require(
             bytes(p.name).length > 0 &&
-                bytes(p.name).length <= 64 && bytes(p.symbol).length > 0 && bytes(p.symbol).length <= 12,
+                bytes(p.name).length <= 64 &&
+                bytes(p.symbol).length > 0 &&
+                bytes(p.symbol).length <= 12,
             "HOLD: identity"
         );
         require(
-            p.maxSupply > 0 && p.maxSupply <= 1e30 &&
+            p.maxSupply > 0 &&
+                p.maxSupply <= 1e30 &&
                 p.saleAmount > 0 &&
                 p.saleAmount < p.maxSupply,
             "HOLD: positive LP reserve"
@@ -63,7 +65,10 @@ contract HoldPresetValidator is IOpenFourPresetValidator {
                 p.migrateParams.length == 0,
             "HOLD: unexpected params"
         );
-        HoldConfig.Config memory t = abi.decode(p.tokenParams, (HoldConfig.Config));
+        HoldConfig.Config memory t = abi.decode(
+            p.tokenParams,
+            (HoldConfig.Config)
+        );
         HoldConfig.validate(t);
         require(
             t.core == core &&
@@ -73,9 +78,9 @@ contract HoldPresetValidator is IOpenFourPresetValidator {
                 t.operations != address(0),
             "HOLD: trusted components"
         );
-        PiCurveModule.Config memory c = abi.decode(
+        VirtualReserveCurve.Config memory c = abi.decode(
             p.curveParams,
-            (PiCurveModule.Config)
+            (VirtualReserveCurve.Config)
         );
         require(
             c.virtualToken > p.saleAmount &&
