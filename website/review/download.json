@@ -1,8 +1,8 @@
 {
   "file": "holdpi-bnb-review.zip",
-  "sha256": "e3c011c9ca4b999cae39e575d91b8b29119433d39f1ed27612168fd668d3384f",
-  "bytes": 2296671,
-  "members": 126,
-  "source_files": 30,
+  "sha256": "e62abc169c9144f7e6190c2ced7d6a902722f6d25e288baa8ab5bbd7a2bd9963",
+  "bytes": 3150024,
+  "members": 219,
+  "source_files": 56,
   "contracts": 10
 }
