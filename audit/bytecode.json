@@ -1,0 +1,68 @@
+{
+  "compiler": "0.8.24+commit.e11b9ed9.Emscripten.clang",
+  "solidityFilesCompiled": 45,
+  "legacyCreationMatches": 10,
+  "protocolArtifactsMatch": 40,
+  "protocolComponentHashes": [
+    {
+      "name": "HoldConfig",
+      "creationSha256": "13ac60ccd2f7e00aa4b20fd4b79b05de2f50a4faf42ad9360c0ed45fbdd2215f",
+      "runtimeTemplateSha256": "d1ffc7ea3952908eabb16ad3097e80bf96ca74c2afc0badc1b9e7f85d7b4f462",
+      "runtimeBytes": 58
+    },
+    {
+      "name": "HoldCurveModule",
+      "creationSha256": "671f90015ed0959f2bf45fdb1bec5aa2f852b81dbe6c72c7f150bffe83e41cf1",
+      "runtimeTemplateSha256": "fceca84502e3fe98999d7034e91b9b230430af78d07f917a9f6c24705aea1371",
+      "runtimeBytes": 5997
+    },
+    {
+      "name": "HoldMigrateModule",
+      "creationSha256": "972eabf4c3b33ad949ae0d9d45c2743c619520234af0f5b6e38f3af21830c482",
+      "runtimeTemplateSha256": "ac2f6bce61263c6d98d00ab7a6a79990d6c60c46b7cc1893e342d20ca64678fb",
+      "runtimeBytes": 6383
+    },
+    {
+      "name": "HoldPresetValidator",
+      "creationSha256": "d9d041a6c80e45bb5505fdf1ef82db2b350537137467b45707d2be8c4bf63f47",
+      "runtimeTemplateSha256": "9794cffcb41ef4ce1cd3677a760e25e689ecd8d64e90b37bdecd0ed19f127afc",
+      "runtimeBytes": 4248
+    },
+    {
+      "name": "HoldRewards",
+      "creationSha256": "8b10ae58a54ef7f76051e20c23179d213544bc74c9838273028ad58f29992d74",
+      "runtimeTemplateSha256": "4f83efb61bf583acc1ec000d86b18b2d962e615b67f75c3758bddaa7ad69b2a4",
+      "runtimeBytes": 9097
+    },
+    {
+      "name": "HoldToken",
+      "creationSha256": "0f41e00d1d1d6e1eb2e1971c302033b2eb4f8ae5d8371d8e67369baa7c2a7942",
+      "runtimeTemplateSha256": "75a251010868808483916b4a7dd4995e771a9259b8ddf21ff4a47ad4f8b91874",
+      "runtimeBytes": 13814
+    },
+    {
+      "name": "HoldTokenModule",
+      "creationSha256": "9cd11d5644c4c8e4cc80b1818c2261b4bc9f01afe8f3fb4eb86a76a8de957bc6",
+      "runtimeTemplateSha256": "a6eb16c28b5cb08e80c77d182ef93b42b40788aa4a1c7a3456c177a7737a4744",
+      "runtimeBytes": 6790
+    },
+    {
+      "name": "HoldTradeModule",
+      "creationSha256": "806543e75ffd1e65658b4e10ba49f27cd805956c7fd0a6217b71a6ad8bf6ccfa",
+      "runtimeTemplateSha256": "ec9f45ab2a369e2e28d3716a8308cc31416a391fb496a2719fdbc8b3f338562d",
+      "runtimeBytes": 3322
+    },
+    {
+      "name": "HoldTreasury",
+      "creationSha256": "a5a18b3be4a927800fbc43c7fc86ef2f948aad150414f0c1cd2fca7d063015e9",
+      "runtimeTemplateSha256": "bf983f27aa6d4b0abe35947956a1d979b13a938b3515525c052fa0b0a08762d6",
+      "runtimeBytes": 12508
+    },
+    {
+      "name": "HoldVault",
+      "creationSha256": "8387205bdcfe59ccea14c7120c3ec5f19d00ff19ad8d8c4c39eef47aa3a0b940",
+      "runtimeTemplateSha256": "a896f05ec9f897a374d094e9c685e621be4eca31424764bb9dba39888f68568c",
+      "runtimeBytes": 6909
+    }
+  ]
+}
