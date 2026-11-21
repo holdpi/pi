@@ -1,0 +1,11 @@
+{
+  "status": "REVIEW TEMPLATE - no PI deployment or approved preset ID",
+  "chainId": 56,
+  "token": {"name": "Passive Income", "symbol": "PI", "decimals": 18, "maxSupply": "1000000000000000000000000000"},
+  "confirmedExternalAssets": {
+    "WBNB": "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
+    "PancakeSwapV2Router": "0x10ED43C718714eb63d5aA57B78B54704E256024E"
+  },
+  "requiresProductionReview": ["OpenFour Core and Registry addresses and versions", "Preset ID and module registration", "PI component deployment addresses", "Operations recipient", "Sale inventory and virtual reserves", "Registry and beacon upgrade authority", "Production Core settlement and migration verification", "Independent audit and launch approval"],
+  "reviewFixtureOnly": {"salePI": "800000000", "virtualPI": "1000000000", "virtualWBNB": "100", "fullSaleRaisedWBNB": "400"}
+}
